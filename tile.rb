@@ -31,5 +31,12 @@ class Tile
     end
   end
 
+  def to_s
+    if @revealed
+      @bombed ? "*" : @n_bombs
+    else
+      "_"
+    end
+  end
 
 end
