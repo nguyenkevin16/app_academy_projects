@@ -7,16 +7,24 @@ class KnightPathFinder
 
   def initialize(start_pos)
     @visited_pos = [start_pos]
-    @move_tree = PolyTreeNode.new(start_pos)
+    @move_tree_root = PolyTreeNode.new(start_pos)
   end
 
   def find_path(end_pos)
+    target_node = @move_tree_root.dfs(end_pos)
+    path = trace_path_back(target_node)
+  end
 
+  def trace_path_back(curr_node)
+    next_node = curr_node.parent
+    return [curr_node.value] if next_node.nil?
+
+    trace_path_back(next_node) << curr_node.value
   end
 
   def build_move_tree
     # Implement a BF algorithm
-    queue = [@move_tree]
+    queue = [@move_tree_root]
 
     until queue.empty?
 
@@ -28,10 +36,10 @@ class KnightPathFinder
         parent.add_child(child)
         queue << child
       end
-      
+
     end
 
-    @move_tree
+    @move_tree_root
   end
 
   def new_move_positions(pos)
@@ -42,10 +50,6 @@ class KnightPathFinder
     @visited_pos += new_moves
 
     new_moves
-  end
-
-  def trace_path_back(curr_node)
-
   end
 
   def self.valid_moves(pos)
@@ -72,4 +76,5 @@ end
 if __FILE__ == $0
   k = KnightPathFinder.new([0, 0])
   k.build_move_tree
+  p k.find_path([7,6])
 end
