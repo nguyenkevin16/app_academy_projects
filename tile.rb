@@ -1,4 +1,5 @@
 class Tile
+  attr_reader :bombed
 
   def initialize(bombed = false, board, pos)
     @bombed, @board = bombed, board
@@ -36,7 +37,7 @@ class Tile
 
   def to_s
     if @revealed
-      @bombed ? "*" : @n_bombs
+      @bombed ? "*" : @n_bombs.to_s
     else
       "_"
     end

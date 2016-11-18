@@ -24,10 +24,11 @@ class Board
   end
 
   def render
-    puts "  #{(0...size).to_a.join(' ')}"
+    puts "   #{(0...size).to_a.join(' ')}"
+    puts "  #{'--' * size}"
 
     @grid.each_with_index do |row, idx|
-      puts "#{idx} #{row.join(' ')}"
+      puts "#{idx}| #{row.join(' ')}"
     end
 
     nil
