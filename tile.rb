@@ -25,7 +25,10 @@ class Tile
       [1, -1], [1, 0], [1, 1]
     ]
 
+    # Add center_pos to each element of deltas array to create neighbors
     n_poses = deltas.map { |n| [n[0] + @pos[0], n[1] + @pos[1]] }
+
+    # Return only neighbors within the board
     n_poses.select do |n_pos|
       n_pos.all? { |val| val >= 0 && val < @board.size }
     end
