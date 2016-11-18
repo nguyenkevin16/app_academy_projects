@@ -1,13 +1,16 @@
+require_relative 'tile'
+
 class Board
+  attr_reader :size
 
   def default_grid
-    Array.new(9) { Array.new(9) }
+    Array.new(9) { Array.new }
   end
 
   def initialize(grid = default_grid)
     @grid = grid
     @size = grid.length
-    # populate
+    populate
   end
 
   def [](pos)
@@ -21,8 +24,11 @@ class Board
   end
 
   def populate
-
-
+    size.times do |x|
+      size.times do |y|
+        is_a_bomb = rand(5) == 0
+        @grid[x] << Tile.new(is_a_bomb, self, [x, y])
+      end
+    end
   end
-
 end
