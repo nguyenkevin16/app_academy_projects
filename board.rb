@@ -23,6 +23,16 @@ class Board
     @grid[row][col] = mark
   end
 
+  def render
+    puts "  #{(0...size).to_a.join(' ')}"
+
+    @grid.each_with_index do |row, idx|
+      puts "#{idx} #{row.join(' ')}"
+    end
+
+    nil
+  end
+
   def populate
     size.times do |x|
       size.times do |y|
