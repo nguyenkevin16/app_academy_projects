@@ -1,6 +1,7 @@
 class Stack
-  def initialize
+  def initialize(stack = [])
     # create ivar to store stack here!
+    @stack = stack
   end
 
   def add(el)
@@ -14,4 +15,8 @@ class Stack
   def show
     # return a copy of the stack
   end
+
+  private
+
+  attr_reader :stack
 end
