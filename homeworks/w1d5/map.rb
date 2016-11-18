@@ -9,17 +9,20 @@ class Map
 
   def lookup(key)
     return nil if my_map.empty?
-
     my_map.each { |entry| return entry.last if entry.first == key }
     nil
   end
 
   def remove(key)
+    return nil if lookup(key).nil?
 
+    my_map.delete_if do |entry|
+      entry.first == key
+    end
   end
 
   def show
-
+    my_map
   end
 
   private
