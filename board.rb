@@ -34,6 +34,15 @@ class Board
     nil
   end
 
+  def won?
+    @grid.all? do |row|
+      row.all? do |tile|
+        tile.revealed unless tile.bombed
+        # tile.revealed == false || tile.bombed == false
+      end
+    end
+  end
+
   def populate
     size.times do |x|
       size.times do |y|
