@@ -17,10 +17,9 @@ class KnightPathFinder
   def build_move_tree
     # Implement a BF algorithm
     queue = [@move_tree]
-    
 
     until queue.empty?
-      debugger
+
       parent = queue.shift
       children_pos = new_move_positions(parent.value)
 
@@ -29,6 +28,7 @@ class KnightPathFinder
         parent.add_child(child)
         queue << child
       end
+      
     end
 
     @move_tree
@@ -37,7 +37,11 @@ class KnightPathFinder
   def new_move_positions(pos)
     valid_pos = self.class.valid_moves(pos)
 
-    valid_pos.reject { |new_pos| @visited_pos.include?(new_pos) }
+    new_moves = valid_pos.reject { |new_pos| @visited_pos.include?(new_pos) }
+
+    @visited_pos += new_moves
+
+    new_moves
   end
 
   def trace_path_back(curr_node)
@@ -60,8 +64,12 @@ class KnightPathFinder
         valid_pos << new_pos
       end
     end
-
     valid_pos
   end
 
+end
+
+if __FILE__ == $0
+  k = KnightPathFinder.new([0, 0])
+  k.build_move_tree
 end
