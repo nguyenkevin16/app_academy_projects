@@ -2,6 +2,9 @@
 #sum of the integers.
 
 def sum_recur(array)
+  return 0 if array.empty?
+
+  sum_recur(array[1..-1]) + array.first
 end
 
 #Problem 2: You have array of integers. Write a recursive solution to determine
