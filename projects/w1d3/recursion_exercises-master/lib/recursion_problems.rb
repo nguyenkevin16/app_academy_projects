@@ -11,6 +11,10 @@ end
 #whether or not the array contains a specific value.
 
 def includes?(array, target)
+  return false if array.empty?
+  return true if array.first == target
+
+  includes?(array[1..-1], target)
 end
 
 # Problem 3: You have an unsorted array of integers. Write a recursive solution
