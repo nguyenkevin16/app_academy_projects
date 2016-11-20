@@ -1,4 +1,4 @@
-  # Back in the good old days, you used to be able to write a darn near
+# Back in the good old days, you used to be able to write a darn near
 # uncrackable code by simply taking each letter of a message and incrementing it
 # by a fixed number, so "abc" by 2 would look like "cde", wrapping around back
 # to "a" when you pass "z".  Write a function, `caesar_cipher(str, shift)` which
@@ -10,20 +10,21 @@
 
 def caesar_cipher(str, shift)
   alphabet = ("a".."z").to_a
-  encrypted_str = ""
+  new_string = ""
 
   str.chars.each do |char|
     if char == " "
-      encrypted_str << " "
-      next
-    end
+      new_string << " "
+    else
+      orig_idx = alphabet.index(char)
+      new_idx = (orig_idx + shift) % 26
 
-    new_char_idx = (alphabet.index(char) + shift) % 26
-    new_char = alphabet[new_char_idx]
-    encrypted_str << new_char
+      new_char = alphabet[new_idx]
+      new_string << new_char
+    end
   end
 
-  encrypted_str
+  new_string
 end
 
 # Write a method, `digital_root(num)`. It should Sum the digits of a positive
@@ -35,27 +36,19 @@ end
 # one step of the process.
 
 def digital_root(num)
-  root = num
+  return num if num < 10
+  total = 0
 
-  until root < 10
-    root = digital_root_step(root)
+  if num % 10 != 0
+    total += num % 10
+    num -= num % 10
+  else
+    total += num / 10
+    total -= num * 10
   end
 
-  root
+  total
 end
-
-def digital_root_step(num)
-  total = num % 10
-  remainder = num - total
-
-  total + remainder / 10
-end
-
-# 67
-# total = 7
-# remainder = 60
-# total = 13
-
 
 # Jumble sort takes a string and an alphabet. It returns a copy of the string
 # with the letters re-ordered according to their positions in the alphabet. If
@@ -66,16 +59,21 @@ end
 # jumble_sort("hello", ['o', 'l', 'h', 'e']) => 'ollhe'
 
 def jumble_sort(str, alphabet = nil)
-  alphabet ||= ("a".."z").to_a
+  alphabet = ("a".."z").to_a if alphabet.nil?
+
+  chars_hash = Hash.new(0)
+  str.chars.each { |char| chars_hash[char] += 1 }
   new_str = ""
 
-  alphabet.each do |ordered|
-    str.each_char do |letter|
-      new_str << ordered if ordered == letter
+  alphabet.each do |alphabet_letter|
+    if chars_hash.keys.include?(alphabet_letter)
+      new_str << alphabet_letter * chars_hash[alphabet_letter]
+      chars_hash[alphabet_letter] = 0
     end
   end
 
   new_str
+
 end
 
 class Array
@@ -89,17 +87,15 @@ class Array
   #   [0, 1] before [0, 2] (then smaller second elements come first)
 
   def two_sum
-    two_sum_pos = []
+    array = []
 
-    (0...(self.length - 1)).each do |idx1|
-      (idx1...self.length).each do |idx2|
-        if self[idx1] + self[idx2] == 0 && idx1 != idx2
-          two_sum_pos << [idx1, idx2]
-        end
+    0.upto(self.count - 2) do |idx1|
+      1.upto(self.count - 1) do |idx2|
+        array << [idx1, idx2] if self[idx1] + self[idx2] == 0
       end
     end
 
-    two_sum_pos
+    array
   end
 end
 
@@ -108,27 +104,18 @@ class String
   # dictionary argument. The method does NOT return any duplicates.
 
   def real_words_in_string(dictionary)
-    subwords = []
-
-    (0..self.length).each do |start_idx|
-      (start_idx..self.length).each do |end_idx|
-        substr = self[start_idx..end_idx]
-        subwords << substr if dictionary.include?(substr)
-      end
+    array = []
+    dictionary.each do |word|
+      array << word unless self.scan(word).count == 0
     end
-
-    subwords.uniq
+    array
   end
 end
 
 # Write a method that returns the factors of a number in ascending order.
 
 def factors(num)
-  factors = []
-
-  1.upto(num) do |factor|
-    factors << factor if num % factor == 0
-  end
-
-  factors
+  array = []
+  1.upto(num) { |divisor| array << divisor if num % divisor == 0 }
+  array
 end
