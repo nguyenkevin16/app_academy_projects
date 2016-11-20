@@ -21,6 +21,10 @@ end
 # to count the number of occurrences of a specific value.
 
 def num_occur(array, target)
+  return 0 if array.empty?
+
+  total = (array.first == target ? 1 : 0)
+  total + num_occur(array[1..-1], target)
 end
 
 # Problem 4: You have array of integers. Write a recursive solution to determine
