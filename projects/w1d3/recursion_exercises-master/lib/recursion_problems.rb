@@ -31,16 +31,28 @@ end
 # whether or not two adjacent elements of the array add to 12.
 
 def add_to_twelve?(array)
+  return false if array.length <= 1
+  return true if array[0] + array[1] == 12
+
+  add_to_twelve?(array[1..-1])
 end
 
 # Problem 5: You have array of integers. Write a recursive solution to determine
 # if the array is sorted.
 
 def sorted?(array)
+  return true if array.length <= 1
+  return false if array[1] < array[0]
+
+  sorted?(array[1..-1])
 end
 
 # Problem 6: Write a recursive function to reverse a string. Don't use any
 # built-in #reverse methods!
 
 def reverse(string)
+  return string if string.length <= 1
+
+  rev_string = string[-1]
+  rev_string + reverse(string[0..-2])
 end
