@@ -77,7 +77,7 @@ class Array
     (self.length - 1).downto(0).each do |idx|
       reversed_arr << self[idx]
     end
-    
+
     reversed_arr
   end
 
