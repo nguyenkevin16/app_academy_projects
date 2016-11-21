@@ -4,4 +4,8 @@ class Piece
 
   end
 
+  def to_s
+    "p"
+  end
+
 end

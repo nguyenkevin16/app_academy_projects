@@ -21,13 +21,16 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    raise if self[start_pos].nil? ||
-      end_pos.any? { |coord| coord < 0 || coord > 7 }
+    raise if self[start_pos].nil? || !in_bounds?(end_pos)
     rescue
       puts "Invalid position."
 
     self[end_pos] = self[start_pos]
     self[start_pos] = nil
+  end
+
+  def in_bounds?(pos)
+    pos.all? { |coord| coord >= 0 && coord <= 7 }
   end
 
   def [](pos)
