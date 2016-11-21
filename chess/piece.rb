@@ -4,6 +4,10 @@ class Piece
 
   end
 
+  def moves
+
+  end
+
   def to_s
     "p"
   end
