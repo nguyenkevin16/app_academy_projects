@@ -39,18 +39,14 @@ class Board
   def pawn_row(color)
     row = []
     row_idx = color == :white ? 1 : 6
-
-    0.upto(7) do |i|
-      row << Pawn.new([row_idx, i], self, color)
-    end
-
+    0.upto(7) { |i| row << Pawn.new([row_idx, i], self, color) }
     row
   end
 
   def move_piece(start_pos, end_pos)
     raise if self[start_pos] == @null_piece || !in_bounds?(end_pos)
-    rescue
-      puts "Invalid position."
+  rescue
+    puts "Invalid position."
 
     self[end_pos] = self[start_pos]
     self[start_pos] = @null_piece
@@ -75,4 +71,6 @@ if __FILE__ == $0
   b = Board.new
   d = Display.new(b)
   d.display_loop
+
+
 end

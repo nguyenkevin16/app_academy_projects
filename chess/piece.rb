@@ -60,6 +60,7 @@ end
 
 class Piece
   attr_reader :sym
+  attr_accessor :pos
 
   def initialize(pos, board, color = :white)
     @sym = "p"
@@ -68,15 +69,9 @@ class Piece
     @color = color
   end
 
-
   def moves
 
   end
-
-  def to_s
-    "p"
-  end
-
 end
 
 class NullPiece < Piece
@@ -84,10 +79,6 @@ class NullPiece < Piece
 
   def initialize
     @sym = " "
-  end
-
-  def to_s
-    " "
   end
 end
 
@@ -160,14 +151,11 @@ class King < Piece
   end
 
   def move_dirs
-    [ [1, 0],
-      [1, 1],
-      [1, -1],
-      [0, 1],
-      [0, -1],
-      [-1, 0],
-      [-1, -1],
-      [-1, 1]]
+    [
+      [1, 0],  [1, 1],   [1, -1],
+      [0, 1],            [0, -1],
+      [-1, 0], [-1, -1], [-1, 1]
+    ]
   end
 
 end
