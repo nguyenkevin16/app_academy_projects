@@ -39,7 +39,7 @@ class Tile
 
   def to_s
     if @revealed
-      @bombed ? "*" : @n_bombs.to_s
+      @bombed ? "*".colorize(:red) : @n_bombs.to_s.colorize(:blue)
     else
       " "
     end
