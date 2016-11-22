@@ -44,9 +44,15 @@ class Tile
 
   def to_s
     if @flagged
-      "f"
+      "\u2690".encode('utf-8').colorize(color: :black, background: :light_cyan)
     elsif @revealed
-      @bombed ? "*" : @n_bombs.to_s
+      if @bombed
+        "\u2620".encode('utf-8').colorize(:red)
+      elsif @n_bombs == 0
+        "\u2610".encode('utf-8').colorize(:light_cyan)
+      else
+        @n_bombs.to_s.colorize(:light_cyan)
+      end
     else
       " "
     end
