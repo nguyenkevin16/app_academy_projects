@@ -2,10 +2,8 @@ require "io/console"
 
 KEYMAP = {
   " " => :space,
-  "h" => :left,
-  "j" => :down,
-  "r" => :reveal,
-  "f" => :flag,
+  "j" => :reveal,
+  "k" => :flag,
   "w" => :up,
   "a" => :left,
   "s" => :down,
