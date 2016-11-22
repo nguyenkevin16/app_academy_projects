@@ -1,16 +1,12 @@
 require_relative 'board'
 require_relative 'tile'
+require_relative 'cursor'
 
 class MineSweeper
 
   def initialize(board = Board.new)
     @board = board
-  end
-
-  def play_turn
-    prompt_user
-    pos = get_pos
-    @board[pos].reveal
+    @cursor = Cursor.new([0, 0], @board)
   end
 
   def prompt_user
@@ -25,8 +21,8 @@ class MineSweeper
     game_over = 0
 
     until game_over == -1 || @board.won?
-      @board.render
-      game_over = play_turn
+      @board.render(@cursor.cursor_pos)
+      game_over = @cursor.get_input
       system 'clear'
     end
 
@@ -36,7 +32,7 @@ class MineSweeper
       puts "You lose..."
     end
 
-    @board.render
+    @board.render(@cursor.cursor_pos)
   end
 
 end
