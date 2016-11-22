@@ -1,4 +1,5 @@
 require_relative 'piece'
+require_relative 'display'
 
 class Board
   attr_reader :board
@@ -14,7 +15,7 @@ class Board
       if idx >= 2 && idx < 6
         8.times { piece_row << nil }
       else
-        8.times { piece_row << Piece.new }
+        8.times { piece_row << Piece.new([1,1], self) }
       end
       @board[idx] += piece_row
     end
@@ -46,7 +47,7 @@ end
 
 if __FILE__ == $0
   b = Board.new
-  puts b.board
-  b.move_piece([0,0], [-1, 5])
-  puts b.board
+  d = Display.new(b)
+  d.render
+  p b[[1, 1]].moves
 end

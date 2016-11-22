@@ -14,6 +14,7 @@ class Display
     header = "  "
     8.times { |x| header << " #{x} " }
     puts header
+
     @board.board.each_with_index do |row, row_idx|
       print "#{row_idx} "
       row.each_with_index do |piece, col_idx|
