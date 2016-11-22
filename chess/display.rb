@@ -19,10 +19,10 @@ class Display
       print "#{row_idx} "
       row.each_with_index do |piece, col_idx|
         if @cursor.cursor_pos == [row_idx, col_idx]
-          print " #{piece.sym} ".colorize(:background => :green)
+          print " #{piece.sym} ".colorize(:background => :light_red)
         else
           print (row_idx + col_idx).even? ? " #{piece.sym} "
-            : " #{piece.sym} ".colorize(:color => :white, :background => :black)
+            : " #{piece.sym} ".colorize(:background => :light_cyan)
         end
       end
 
@@ -41,9 +41,9 @@ class Display
 end
 
 if __FILE__ == $0
-  b = Board.new
-  d = Display.new(b)
-  d.display_loop
+  # b = Board.new
+  # d = Display.new(b)
+  # d.display_loop
 
-  # p String.colors
+  p String.colors
 end
