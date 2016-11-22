@@ -70,7 +70,8 @@ end
 if __FILE__ == $0
   b = Board.new
   d = Display.new(b)
-  d.display_loop
+  #d.display_loop
+  p b[[7, 1]].moves
 
 
 end
