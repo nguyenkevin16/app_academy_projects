@@ -11,8 +11,13 @@ class Tile
   end
 
   def reveal
+    return if @flagged
     @revealed = true
     @bombed ? -1 : count_neighbor_bombs
+  end
+
+  def toggle_flag
+    @flagged = (@flagged ? false : true)
   end
 
   def count_neighbor_bombs
@@ -38,8 +43,10 @@ class Tile
   end
 
   def to_s
-    if @revealed
-      @bombed ? "*".colorize(:red) : @n_bombs.to_s.colorize(:blue)
+    if @flagged
+      "f"
+    elsif @revealed
+      @bombed ? "*" : @n_bombs.to_s
     else
       " "
     end
