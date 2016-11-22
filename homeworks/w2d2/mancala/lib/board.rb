@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Board
   attr_accessor :cups
 
@@ -19,9 +21,8 @@ class Board
   end
 
   def valid_move?(start_pos)
-    unless start_pos > 12 && start_pos < 1
-      raise 'Invalid starting cup'
-    end
+    raise "Invalid starting cup" if start_pos < 0 || start_pos > 12
+    raise "Invalid starting cup" if @cups[start_pos].empty?
   end
 
   def make_move(start_pos, current_player_name)
@@ -30,17 +31,34 @@ class Board
     @cups[start_pos].length.times { stones << @cups[start_pos].shift }
 
     # distributes stones
-    curr_pos = start_pos + 1
-    other_side = (current_player_name == @name1 ? 13 : 6)
-    stones.length.times do
-      @cups[curr_pos] << stones.shift unless curr_pos == other_side
-      curr_pos += 1
-      curr_pos %= 13
+    cup_idx = start_pos
+
+    until stones.empty?
+      cup_idx += 1
+      cup_idx = 0 if cup_idx > 13
+      # places stones in the correct current player's cups
+      if cup_idx == 6
+        @cups[6] << stones.pop if current_player_name == @name1
+      elsif cup_idx == 13
+        @cups[13] << stones.pop if current_player_name == @name2
+      else
+        @cups[cup_idx] << stones.pop
+      end
     end
+
+    render
+    next_turn(cup_idx)
   end
 
   def next_turn(ending_cup_idx)
     # helper method to determine what #make_move returns
+    if ending_cup_idx == 6 || ending_cup_idx == 13
+      :prompt
+    elsif @cups[ending_cup_idx].count == 1
+      :switch
+    else
+      ending_cup_idx
+    end
   end
 
   def render
@@ -59,5 +77,12 @@ class Board
   end
 
   def winner
+    if @cups[6] == @cups[13]
+      :draw
+    elsif @cups[6].length > @cups[13].length
+      @name1
+    else
+      @name2
+    end
   end
 end
