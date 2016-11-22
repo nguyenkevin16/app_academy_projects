@@ -43,13 +43,29 @@ module SlidingPiece
 
 end
 
+module SteppingPiece
+  def moves
+    possible_moves = []
+
+    move_dirs.each do |v|
+      new_pos = [@pos[0] + v[0], @pos[1] + v[1]]
+      if @board.in_bounds?(new_pos) && @board[new_pos] == @board.null_piece
+        possible_moves << new_pos
+      end
+    end
+
+    possible_moves
+  end
+end
+
 class Piece
   attr_reader :sym
 
-  def initialize(pos, board)
+  def initialize(pos, board, color = :white)
     @sym = "p"
     @pos = pos
     @board = board
+    @color = color
   end
 
 
@@ -78,6 +94,11 @@ end
 class Bishop < Piece
   include SlidingPiece
 
+  def initialize(pos, board)
+    super
+    @sym = @color == :white ? "\u2657".encode('utf-8') : "\u265D".encode('utf-8')
+  end
+
   def move_dirs
     SlidingPiece::DIAG_MOVES
   end
@@ -85,6 +106,11 @@ end
 
 class Rook < Piece
   include SlidingPiece
+
+  def initialize(pos, board)
+    super
+    @sym = @color == :white ? "\u2656".encode('utf-8') : "\u265C".encode('utf-8')
+  end
 
   def move_dirs
     SlidingPiece::HORIZ_MOVES
@@ -95,12 +121,53 @@ end
 class Queen < Piece
   include SlidingPiece
 
+  def initialize(pos, board)
+    super
+    @sym = @color == :white ? "\u2655".encode('utf-8') : "\u265B".encode('utf-8')
+  end
+
   def move_dirs
     SlidingPiece::HORIZ_MOVES.merge(SlidingPiece::DIAG_MOVES)
   end
 end
 
+class Knight < Piece
+  include SteppingPiece
 
-module SteppingPiece
+  def initialize(pos, board)
+    super
+    @sym = @color == :white ? "\u2658".encode('utf-8') : "\u265E".encode('utf-8')
+  end
+
+  def move_dirs
+    [ [1, 2],
+      [-1, 2],
+      [-1, -2],
+      [1, -2],
+      [2, 1],
+      [2, -1],
+      [-2, 1],
+      [-2, -1]]
+  end
+end
+
+class King < Piece
+  include SteppingPiece
+
+  def initialize(pos, board)
+    super
+    @sym = @color == :white ? "\u2654".encode('utf-8') : "\u265A".encode('utf-8')
+  end
+
+  def move_dirs
+    [ [1, 0],
+      [1, 1],
+      [1, -1],
+      [0, 1],
+      [0, -1],
+      [-1, 0],
+      [-1, -1],
+      [-1, 1]]
+  end
 
 end

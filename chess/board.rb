@@ -16,7 +16,7 @@ class Board
       if idx >= 2 && idx < 6
         8.times { piece_row << @null_piece }
       else
-        8.times { piece_row << Piece.new([1,1], self) }
+        8.times { piece_row << Knight.new([1,1], self) }
       end
       @board[idx] += piece_row
     end
