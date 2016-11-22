@@ -1,4 +1,5 @@
 require_relative 'tile'
+require 'colorize'
 
 class Board
   attr_reader :size
@@ -23,12 +24,25 @@ class Board
     @grid[row][col] = mark
   end
 
-  def render
+  def render(cursor_pos)
     puts "   #{(0...size).to_a.join(' ')}"
-    puts "  #{'--' * size}"
+    # puts "  #{'__' * size}"
 
-    @grid.each_with_index do |row, idx|
-      puts "#{idx}| #{row.join(' ')}"
+    @grid.each_with_index do |row, idx1|
+      print "#{idx1}| "
+
+      row.each_with_index do |tile, idx2|
+
+        if cursor_pos == [idx1, idx2]
+          print tile.to_s.colorize(background: :red) + " "
+        else
+          print "#{tile} "
+        end
+
+        # puts "#{idx}| #{row.join(' ')}".colorize(background: :magenta)
+      end
+
+      puts
     end
 
     nil
