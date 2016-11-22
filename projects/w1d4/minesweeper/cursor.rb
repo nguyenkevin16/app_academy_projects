@@ -4,8 +4,8 @@ KEYMAP = {
   " " => :space,
   "h" => :left,
   "j" => :down,
-  "k" => :up,
-  "l" => :right,
+  "r" => :reveal,
+  "f" => :flag,
   "w" => :up,
   "a" => :left,
   "s" => :down,
@@ -77,8 +77,10 @@ class Cursor
 
   def handle_key(key)
     case key
-    when :space, :return
-      @cursor_pos
+    when :flag
+      @board[@cursor_pos].toggle_flag
+    when :reveal
+      @board[@cursor_pos].reveal
     when :left, :right, :up, :down
       update_pos(MOVES[key])
     when :ctrl_c
