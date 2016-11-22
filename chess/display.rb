@@ -19,10 +19,10 @@ class Display
       print "#{row_idx} "
       row.each_with_index do |piece, col_idx|
         if @cursor.cursor_pos == [row_idx, col_idx]
-          print " #{piece} ".colorize(:background => :green)
+          print " #{piece.sym} ".colorize(:background => :green)
         else
-          print (row_idx + col_idx).even? ? " #{piece} "
-            : " #{piece} ".colorize(:color => :white, :background => :black)
+          print (row_idx + col_idx).even? ? " #{piece.sym} "
+            : " #{piece.sym} ".colorize(:color => :white, :background => :black)
         end
       end
 

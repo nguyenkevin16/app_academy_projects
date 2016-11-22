@@ -1,4 +1,5 @@
 require_relative 'board'
+require 'singleton'
 
 module SlidingPiece
   DIAG_MOVES = {
@@ -28,7 +29,7 @@ module SlidingPiece
         # => add to possible_moves
         # => break
 
-        if @board.in_bounds?(new_pos) && @board[new_pos].nil?
+        if @board.in_bounds?(new_pos) && @board[new_pos] == @board.null_piece
           possible_moves << new_pos
           i += 1
         else
@@ -43,7 +44,10 @@ module SlidingPiece
 end
 
 class Piece
+  attr_reader :sym
+
   def initialize(pos, board)
+    @sym = "p"
     @pos = pos
     @board = board
   end
@@ -57,6 +61,18 @@ class Piece
     "p"
   end
 
+end
+
+class NullPiece < Piece
+  include Singleton
+
+  def initialize
+    @sym = " "
+  end
+
+  def to_s
+    " "
+  end
 end
 
 class Bishop < Piece

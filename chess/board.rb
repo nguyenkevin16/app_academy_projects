@@ -2,10 +2,11 @@ require_relative 'piece'
 require_relative 'display'
 
 class Board
-  attr_reader :board
+  attr_reader :board, :null_piece
 
   def initialize
     @board = Array.new(8) { Array.new }
+    @null_piece = NullPiece.instance
     populate
   end
 
@@ -13,7 +14,7 @@ class Board
     0.upto(7) do |idx|
       piece_row = []
       if idx >= 2 && idx < 6
-        8.times { piece_row << nil }
+        8.times { piece_row << @null_piece }
       else
         8.times { piece_row << Piece.new([1,1], self) }
       end
@@ -22,12 +23,12 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    raise if self[start_pos].nil? || !in_bounds?(end_pos)
+    raise if self[start_pos] == @null_piece || !in_bounds?(end_pos)
     rescue
       puts "Invalid position."
 
     self[end_pos] = self[start_pos]
-    self[start_pos] = nil
+    self[start_pos] = @null_piece
   end
 
   def in_bounds?(pos)
@@ -48,6 +49,5 @@ end
 if __FILE__ == $0
   b = Board.new
   d = Display.new(b)
-  d.render
-  p b[[1, 1]].moves
+  d.display_loop
 end
