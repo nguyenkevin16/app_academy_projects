@@ -41,5 +41,7 @@ class MineSweeper
 
 end
 
-m = MineSweeper.new
-m.run
+if __FILE__ == $0
+  m = MineSweeper.new
+  m.run
+end

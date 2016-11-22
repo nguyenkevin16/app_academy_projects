@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Tile
   attr_reader :bombed, :revealed
 
@@ -39,7 +41,7 @@ class Tile
     if @revealed
       @bombed ? "*" : @n_bombs.to_s
     else
-      "_"
+      " "
     end
   end
 
