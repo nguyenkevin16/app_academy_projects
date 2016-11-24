@@ -11,7 +11,7 @@ def first_anagram?(first_word, second_word)
   false
 end
 
-#Time Complexity = n^2 or maybe n^4?
+#Time Complexity = n^2
 def second_anagram?(first_word, second_word)
   (0...first_word.length).each do |idx1|
     letter_to_check = first_word[idx1]
@@ -25,8 +25,7 @@ def second_anagram?(first_word, second_word)
   return first_word == second_word
 end
 
-# Time complexity = n^2
-# or... is the first_word == second_word another n
+# Time complexity = n log n
 def third_anagram?(first_word, second_word)
   first_word = first_word.chars.sort
   second_word = second_word.chars.sort
@@ -34,7 +33,7 @@ def third_anagram?(first_word, second_word)
   first_word == second_word
 end
 
-# Time complexity = n^2 || n^3 depending on ==
+# Time complexity = n
 def fourth_anagram?(first_word, second_word)
   first_hash = Hash.new(0)
   second_hash = Hash.new(0)
@@ -45,7 +44,16 @@ def fourth_anagram?(first_word, second_word)
   first_hash == second_hash
 end
 
+# Time complexity = n
+def fifth_anagram?(first_word, second_word)
+  word_count = Hash.new(0)
+  first_word.chars.each { |char| word_count[char] += 1 }
+  second_word.chars.each { |char| word_count[char] -= 1 }
+
+  word_count.all? {|_, val| val == 0}
+end
+
 if __FILE__ == $0
-  p fourth_anagram?("gizmo", "sally")    #=> false
-  p fourth_anagram?("elvis", "lives")    #=> true
+  p fifth_anagram?("gizmo", "sally")    #=> false
+  p fifth_anagram?("elvis", "lives")    #=> true
 end
