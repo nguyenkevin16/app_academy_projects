@@ -28,9 +28,21 @@ def okay_two_sum?(arr, target)
   false
 end
 
+#Time Complexity = n
+def great_two_sum?(arr, target)
+  cool_hash = Hash.new(0)
+  arr.each do |el|
+    cool_hash[el] += 1
+    cool_hash[target - el] += 1
+  end
+
+  cool_hash.reject! {|k, v| v < 2 }
+  cool_hash.length == 2
+end
+
 
 if __FILE__ == $0
   arr = [0, 1, 5, 7]
-  p okay_two_sum?(arr, 6) # => should be true
-  p okay_two_sum?(arr, 10) # => should be false
+  p great_two_sum?(arr, 6) # => should be true
+  p great_two_sum?(arr, 10) # => should be false
 end
