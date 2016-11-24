@@ -104,4 +104,3 @@ describe "#factors" do
     expect(factors(13)).to eq([1, 13])
   end
 end
-
