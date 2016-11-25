@@ -31,6 +31,21 @@ class MinMaxStackQueue
     @in_stack.size + @out_stack.size
   end
 
+  def max
+    # At most two operations; O(1)
+    maxes = []
+    maxes << @in_stack.max unless @in_stack.empty?
+    maxes << @out_stack.max unless @out_stack.empty?
+    maxes.max
+  end
+
+  def min
+    mins = []
+    mins << @in_stack.min unless @in_stack.empty?
+    mins << @out_stack.min unless @out_stack.empty?
+    mins.min
+  end
+
   private
 
   def queueify
