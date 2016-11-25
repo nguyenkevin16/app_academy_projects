@@ -1,3 +1,5 @@
+require 'byebug'
+
 class LRUCache
 
   def initialize(cache_limit = 4)
@@ -12,7 +14,7 @@ class LRUCache
 
   def add(el)
     # adds element to cache according to LRU principle
-    if count >= @cache_limit
+    if count >= @cache_limit && !include?(el)
       # remove last used element
       @cache.shift
     end
@@ -32,6 +34,7 @@ class LRUCache
   end
 
   private
+
   # helper methods go here!
   def include?(el)
     @cache.include?(el)
@@ -51,10 +54,12 @@ end
 if __FILE__ == $0
   johnny_cache = LRUCache.new(4)
 
+  debugger
+
   johnny_cache.add("I walk the line")
   johnny_cache.add(5)
 
-  johnny_cache.count # => returns 2
+  p johnny_cache.count == 2 # => returns 2
 
   johnny_cache.add([1,2,3])
   johnny_cache.add(5)
