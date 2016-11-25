@@ -40,10 +40,6 @@ class LRUCache
     @cache.include?(el)
   end
 
-  def find_index(el)
-    @cache.find_index(el)
-  end
-
   def delete(idx)
     @cache.delete(idx)
   end
