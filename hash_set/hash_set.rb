@@ -8,7 +8,7 @@ class MyHashSet < ResizingIntSet
   end
 
   def [](num)
-    puts 0.hash 
+    puts 0.hash
     @store[num.hash % size]
   end
 
