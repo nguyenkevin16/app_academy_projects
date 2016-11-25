@@ -21,7 +21,7 @@ class LRUCache
 
     if include?(el)
       # if already included, move to last position
-      @cache << delete(find_index(el))
+      @cache << delete(el)
     else
       # add to end of array as recently used
       @cache << el
@@ -45,7 +45,7 @@ class LRUCache
   end
 
   def delete(idx)
-    @cache.delete_at(idx)
+    @cache.delete(idx)
   end
 
   attr_reader :cache_limit, :cache
@@ -53,8 +53,6 @@ end
 
 if __FILE__ == $0
   johnny_cache = LRUCache.new(4)
-
-  debugger
 
   johnny_cache.add("I walk the line")
   johnny_cache.add(5)
