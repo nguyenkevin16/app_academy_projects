@@ -1,5 +1,7 @@
 require 'byebug'
 
+
+# Time complexity == n * window size
 def max_windowed_range(array, window_size)
   current_max_range = 0
 
