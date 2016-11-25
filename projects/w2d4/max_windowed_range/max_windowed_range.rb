@@ -18,6 +18,8 @@ def max_windowed_range(array, window_size)
   current_max_range
 end
 
+
+
 if __FILE__ == $0
   p max_windowed_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
   p max_windowed_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
