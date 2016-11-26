@@ -15,6 +15,7 @@ class LRUCache
 
     if @map.include?(key)
       update_link()
+    end
 
   end
 
