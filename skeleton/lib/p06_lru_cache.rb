@@ -10,6 +10,19 @@ class LRUCache
     @prc = prc
   end
 
+  def insert(key, &prc)
+    prc ||= Proc.new{ |key| key ** 2 }
+
+    if @map.include?(key)
+      update_link()
+
+  end
+
+  def no
+
+  end
+
+
   def count
     @map.count
   end
