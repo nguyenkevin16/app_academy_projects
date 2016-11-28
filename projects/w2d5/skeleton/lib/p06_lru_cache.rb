@@ -14,7 +14,9 @@ class LRUCache
     prc ||= Proc.new{ |key| key ** 2 }
 
     if @map.include?(key)
-      update_link()
+      @store.update_link(key, prc.call(key))
+    else
+      @store.append(key, prc.call(key))
     end
 
   end
@@ -29,6 +31,7 @@ class LRUCache
   end
 
   def get(key)
+    @map.get(key)
   end
 
   def to_s
