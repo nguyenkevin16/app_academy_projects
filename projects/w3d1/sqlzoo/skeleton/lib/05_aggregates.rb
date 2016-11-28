@@ -101,16 +101,9 @@ def populous_continents
       DISTINCT continent
     FROM
       countries
-    WHERE
-      continent IN (
-      SELECT
-        continent
-      FROM
-        countries
-      GROUP BY
-        continent
-      HAVING
-        SUM(population) >= 100000000
-      )
+    GROUP BY
+      continent
+    HAVING
+      SUM(population) >= 100000000
   SQL
 end
