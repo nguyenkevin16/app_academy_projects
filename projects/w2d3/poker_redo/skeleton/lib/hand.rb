@@ -6,7 +6,8 @@ class Hand
   attr_reader :cards
 
   def initialize(cards)
-
+    raise "must have five cards" if cards.count != 5
+    @cards = cards
   end
 
   def self.winner(hands)
