@@ -79,7 +79,8 @@ VALUES
   (3, 1),
   (4, 2),
   (1, 2),
-  (3, 2);
+  (3, 2),
+  (2, 2);
 
 INSERT INTO
   replies (user_id, question_id, parent_id, body)

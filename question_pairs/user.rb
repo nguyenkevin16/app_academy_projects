@@ -2,6 +2,7 @@ require_relative "questions_database"
 require_relative 'question'
 require_relative 'reply'
 require_relative 'question_follow'
+require_relative 'question_like'
 
 class User
 
@@ -49,4 +50,17 @@ class User
     QuestionFollow.followed_questions_for_user_id(@id)
   end
 
+  def liked_questions
+    QuestionLike.liked_questions_for_user_id(@id)
+  end
+
+  def average_karma
+    num_question = authored_questions.count
+    total_likes = 0
+    authored_questions.each do |q|
+      total_likes += q.num_likes
+    end
+
+     total_likes / num_question.to_f
+  end
 end
