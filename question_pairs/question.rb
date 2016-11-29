@@ -4,6 +4,7 @@ require_relative 'reply'
 require_relative 'question_follow'
 
 class Question
+  attr_accessor :user_id, :title, :body
 
   def self.find_by_id(id)
     data = QuestionsDatabase.instance.execute(<<-SQL, id)
@@ -66,4 +67,33 @@ class Question
     QuestionLike.num_likes_for_question_id(@id)
   end
 
+  def save
+    raise 'Already saved' unless @id.nil?
+
+    QuestionsDatabase.instance.execute(<<-SQL, @title, @body, @user_id)
+      INSERT INTO
+        questions (title, body, user_id)
+      VALUES
+        (?, ?, ?)
+    SQL
+
+    @id = QuestionsDatabase.instance.last_insert_row_id
+
+  rescue
+    puts "Already saved, automatically updating..."
+    update
+  end
+
+  def update
+    raise "#{self} not in database" unless @id
+
+    QuestionsDatabase.instance.execute(<<-SQL, @title, @body, @user_id, @id)
+      UPDATE
+        questions
+      SET
+        title = ?, body = ?, user_id = ?
+      WHERE
+        id = ?
+    SQL
+  end
 end

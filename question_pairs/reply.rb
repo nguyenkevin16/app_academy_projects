@@ -3,6 +3,7 @@ require_relative 'question'
 require_relative 'user'
 
 class Reply
+  attr_accessor :user_id, :question_id, :parent_id, :body
 
   def self.find_by_id(id)
     data = QuestionsDatabase.instance.execute(<<-SQL, id)
@@ -89,5 +90,35 @@ class Reply
     SQL
 
     data.map { |datum| Reply.new(datum) }
+  end
+
+  def save
+    raise 'Already saved' unless @id.nil?
+
+    QuestionsDatabase.instance.execute(<<-SQL, @user_id, @question_id, @parent_id, @body)
+      INSERT INTO
+        replies (user_id, question_id, parent_id, body)
+      VALUES
+        (?, ?, ?, ?)
+    SQL
+
+    @id = QuestionsDatabase.instance.last_insert_row_id
+
+  rescue
+    puts "Already saved, automatically updating..."
+    update
+  end
+
+  def update
+    raise "#{self} not in database" unless @id
+
+    QuestionsDatabase.instance.execute(<<-SQL, @user_id, @question_id, @parent_id, @body, @id)
+      UPDATE
+        replies
+      SET
+        user_id = ?, question_id = ?, parent_id = ?, body = ?
+      WHERE
+        id = ?
+    SQL
   end
 end
