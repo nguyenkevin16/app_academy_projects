@@ -11,8 +11,8 @@ class User
       WHERE
         id = ?
     SQL
-    
-    User.new(data)
+
+    data.map { |datum| User.new(datum) }
   end
 
   def initialize(options)
