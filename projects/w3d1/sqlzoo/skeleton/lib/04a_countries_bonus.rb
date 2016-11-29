@@ -58,21 +58,18 @@ def large_neighbors
   # neighbors (in the same continent). Give the countries and continents.
   execute(<<-SQL)
     SELECT
-      continent, MAX(population)
+      c1.name, c1.continent
     FROM
-      countries
+      countries c1
     WHERE
-      population NOT IN (
-        SELECT
-          MAX(population)
-        FROM
-          countries
-        GROUP BY
-          continent
-        )
-    GROUP BY
-      continent
-    HAVING
-      MAX(population)
+      population > 3 * (
+      SELECT
+        MAX(population)
+      FROM
+        countries c2
+      WHERE
+        c1.name != c2.name
+        AND c1.continent = c2.continent
+      )
   SQL
 end
