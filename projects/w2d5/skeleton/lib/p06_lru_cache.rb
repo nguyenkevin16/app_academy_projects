@@ -11,12 +11,14 @@ class LRUCache
   end
 
   def insert(key, &prc)
-    prc ||= Proc.new{ |key| key ** 2 }
+    prc ||= Proc.new { |key| key ** 2 }
 
     if @map.include?(key)
-      @store.update_link(key, prc.call(key))
+      @store.update_link(key, prc.call(key)
+      @map.set(key, )
     else
-      @store.append(key, prc.call(key))
+      @store.append(key, prc.call(key)
+      @map.set(key,)
     end
 
   end
