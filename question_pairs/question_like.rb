@@ -1,26 +1,26 @@
 require_relative 'questions_database'
+require_relative 'question'
+require_relative 'user'
 
-class Reply
+class QuestionLike
 
   def self.find_by_id(id)
     data = QuestionsDatabase.instance.execute(<<-SQL, id)
       SELECT
         *
       FROM
-        replies
+        question_likes
       WHERE
         id = ?
     SQL
 
-    data.map { |datum| Reply.new(datum) }
+    data.map { |datum| QuestionLike.new(datum) }.first
   end
 
   def initialize(options)
     @id = options['id']
     @user_id = options['user_id']
     @question_id = options['question_id']
-    @parent_id = options['parent_id']
-    @body = options['body']
   end
 
 end

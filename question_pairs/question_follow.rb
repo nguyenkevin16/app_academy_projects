@@ -1,4 +1,6 @@
 require_relative 'questions_database'
+require_relative 'question'
+require_relative 'user'
 
 class QuestionFollow
 
@@ -12,7 +14,7 @@ class QuestionFollow
         id = ?
     SQL
 
-    data.map { |datum| QuestionFollow.new(datum) }
+    data.map { |datum| QuestionFollow.new(datum) }.first
   end
 
   def initialize(options)
