@@ -1,8 +1,8 @@
 require_relative 'questions_database'
-# require_relative 'question'
-# require_relative 'reply'
-# require_relative 'question_follow'
-# require_relative 'question_like'
+require_relative 'question'
+require_relative 'reply'
+require_relative 'question_follow'
+require_relative 'question_like'
 require_relative 'model'
 
 class User < Model
