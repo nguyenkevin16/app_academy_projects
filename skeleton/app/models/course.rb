@@ -18,4 +18,8 @@ class Course < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :prereq_id,
     class_name: :Course
+
+  has_many :enrolled_students,
+    through: :enrollments,
+    source: :student
 end
