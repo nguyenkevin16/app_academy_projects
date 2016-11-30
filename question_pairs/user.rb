@@ -1,24 +1,12 @@
-require_relative "questions_database"
-require_relative 'question'
-require_relative 'reply'
-require_relative 'question_follow'
-require_relative 'question_like'
+require_relative 'questions_database'
+# require_relative 'question'
+# require_relative 'reply'
+# require_relative 'question_follow'
+# require_relative 'question_like'
+require_relative 'model'
 
-class User
+class User < Model
   attr_accessor :fname, :lname
-
-  def self.find_by_id(id)
-    data = QuestionsDatabase.instance.execute(<<-SQL, id)
-      SELECT
-        *
-      FROM
-        users
-      WHERE
-        id = ?
-    SQL
-
-    data.map { |datum| User.new(datum) }.first
-  end
 
   def self.find_by_name(fname, lname)
     data = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
@@ -37,6 +25,7 @@ class User
     @id = options['id']
     @fname = options['fname']
     @lname = options['lname']
+    # super("users")
   end
 
   def authored_questions
@@ -56,13 +45,20 @@ class User
   end
 
   def average_karma
-    num_question = authored_questions.count
-    total_likes = 0
-    authored_questions.each do |q|
-      total_likes += q.num_likes
-    end
+    avg_karma = QuestionsDatabase.instance.execute(<<-SQL, @id)
+      SELECT
+        CAST(COUNT(question_likes.user_id) AS FLOAT) /
+        COUNT(DISTINCT (questions.id))
+      FROM
+        questions
+      LEFT OUTER JOIN
+        question_likes
+        ON questions.id = question_likes.question_id
+      WHERE
+        questions.user_id = ?
+    SQL
 
-    total_likes / num_question.to_f
+    avg_karma.first.values.first
   end
 
   def save

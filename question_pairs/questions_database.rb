@@ -10,4 +10,8 @@ class QuestionsDatabase < SQLite3::Database
     self.results_as_hash = true
   end
 
+  def self.get_first_row(*args)
+   instance.get_first_row(*args)
+  end
+  
 end

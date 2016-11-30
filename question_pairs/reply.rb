@@ -1,22 +1,11 @@
 require_relative 'questions_database'
 require_relative 'question'
 require_relative 'user'
+require_relative 'model'
 
-class Reply
+class Reply < Model
   attr_accessor :user_id, :question_id, :parent_id, :body
 
-  def self.find_by_id(id)
-    data = QuestionsDatabase.instance.execute(<<-SQL, id)
-      SELECT
-        *
-      FROM
-        replies
-      WHERE
-        id = ?
-    SQL
-
-    data.map { |datum| Reply.new(datum) }.first
-  end
 
   def self.find_by_user_id(user_id)
     data = QuestionsDatabase.instance.execute(<<-SQL, user_id)

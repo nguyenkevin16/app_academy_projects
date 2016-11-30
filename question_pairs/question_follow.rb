@@ -1,21 +1,9 @@
 require_relative 'questions_database'
 require_relative 'question'
 require_relative 'user'
+require_relative 'model'
 
-class QuestionFollow
-
-  def self.find_by_id(id)
-    data = QuestionsDatabase.instance.execute(<<-SQL, id)
-      SELECT
-        *
-      FROM
-        question_follows
-      WHERE
-        id = ?
-    SQL
-
-    data.map { |datum| QuestionFollow.new(datum) }.first
-  end
+class QuestionFollow < Model
 
   def self.followers_for_question_id(question_id)
     data = QuestionsDatabase.instance.execute(<<-SQL, question_id)

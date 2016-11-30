@@ -2,22 +2,10 @@ require_relative 'questions_database'
 require_relative 'user'
 require_relative 'reply'
 require_relative 'question_follow'
+require_relative 'model'
 
-class Question
+class Question < Model
   attr_accessor :user_id, :title, :body
-
-  def self.find_by_id(id)
-    data = QuestionsDatabase.instance.execute(<<-SQL, id)
-      SELECT
-        *
-      FROM
-        questions
-      WHERE
-        id = ?
-    SQL
-
-    data.map { |datum| Question.new(datum) }.first
-  end
 
   def self.find_by_author_id(author_id)
     data = QuestionsDatabase.instance.execute(<<-SQL, author_id)
