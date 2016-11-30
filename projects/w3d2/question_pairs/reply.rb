@@ -30,6 +30,8 @@ class Reply < Model
         question_id = ?
     SQL
 
+    p data
+
     data.map { |datum| Reply.new(datum) }
   end
 
