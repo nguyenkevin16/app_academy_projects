@@ -60,7 +60,20 @@ end
 
 def visit_sites_by_topic(user)
   answer = get_topic
-  TagTopic.find(Integer(answer))
+  topic = TagTopic.find(Integer(answer))
+  popular_urls = topic.most_popular_urls(2)
+  answer = get_popular_website(popular_urls)
+  long_url = popular_urls[answer.to_i].long_url
+  puts "Launching #{long_url}"
+  Launchy.open(long_url.to_s)
+end
+
+def get_popular_website(popular_urls)
+  puts "Here is the most popular urls, choose one."
+  popular_urls.each_with_index do |url, idx|
+    puts "#{idx}. #{url.long_url}"
+  end
+  gets.chomp
 end
 
 def get_long_url
