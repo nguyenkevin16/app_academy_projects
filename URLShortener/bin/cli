@@ -14,6 +14,7 @@ def ask_options
   puts "What do you want to do?"
   puts "0. Create shortened URL"
   puts "1. Visit shortened URL"
+  puts "2. Visit sites by topic"
   gets.chomp
 end
 
@@ -24,6 +25,8 @@ def handle_response(user)
     create_shortened_url(user)
   elsif answer == '1'
     visit_shortened_url(user)
+  elsif answer == '2'
+    visit_sites_by_topic(user)
   else
     raise "Invalid request"
   end
@@ -44,6 +47,20 @@ def visit_shortened_url(user)
   Launchy.open("#{long_url}")
 
   Visit.record_visit!(user, url_object)
+end
+
+def get_topic
+  topics = TagTopic.all.map(&:topic)
+  puts "Choose the topic."
+  topics.each_with_index do |topic, idx|
+    puts "#{idx+1}. #{topic}"
+  end
+  gets.chomp
+end
+
+def visit_sites_by_topic(user)
+  answer = get_topic
+  TagTopic.find(Integer(answer))
 end
 
 def get_long_url

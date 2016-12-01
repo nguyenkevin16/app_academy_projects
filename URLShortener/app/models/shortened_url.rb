@@ -17,6 +17,15 @@ class ShortenedUrl < ActiveRecord::Base
     through: :visits,
     source: :visitor
 
+  has_many :taggings,
+    primary_key: :id,
+    foreign_key: :url_id,
+    class_name: :Tagging
+
+  has_many :topics,
+    through: :taggings,
+    source: :topic
+
   def self.random_code
     random_code = SecureRandom.urlsafe_base64
     until !ShortenedUrl.exists?(short_url: random_code)
@@ -35,10 +44,11 @@ class ShortenedUrl < ActiveRecord::Base
   end
 
   def num_uniques
-    self.visits.select(:user_id).distinct.count
+    self.visitors.count
   end
 
   def num_recent_uniques
     self.visits.select(:user_id).distinct.where("created_at > ?", 1.hour.ago).count
   end
+
 end
