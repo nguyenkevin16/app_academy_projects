@@ -17,7 +17,6 @@ class Gardener
   )
 end
 
-
 # app/models/plant.rb
 class Plant
   belongs_to(
@@ -35,8 +34,6 @@ class Plant
   )
 end
 
-
-
 # app/models/seed.rb
 class Seed
   belongs_to(
@@ -46,7 +43,6 @@ class Seed
     primary_key: :id
   )
 end
-
 
 # app/models/house.rb
 class House
@@ -75,5 +71,13 @@ class House
 
   def better_seeds_query
     # TODO: your code here
+    plants = self.plants.includes(:seeds)
+
+    seeds = []
+    plants.each do |plant|
+      seeds << plant.seeds
+    end
+
+    seeds
   end
 end

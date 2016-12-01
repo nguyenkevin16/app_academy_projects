@@ -12,7 +12,6 @@ class Driver
   )
 end
 
-
 # app/models/bus.rb
 class Bus
   belongs_to(
@@ -29,7 +28,6 @@ class Bus
     primary_key: :id,
   )
 end
-
 
 # app/models/route.rb
 class Route
@@ -57,5 +55,19 @@ class Route
 
   def better_drivers_query
     # TODO: your code here
+    buses = self.buses.includes(:drivers)
+
+    all_drivers = {}
+    buses.each do |bus|
+      drivers = []
+
+      bus.drivers.each do |driver|
+        drivers << driver.name
+      end
+
+      all_drivers[bus.id] = drivers
+    end
+
+    all_drivers
   end
 end

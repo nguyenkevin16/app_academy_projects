@@ -10,7 +10,6 @@ class Track
   )
 end
 
-
 # app/models/album.rb
 class Album
   belongs_to(
@@ -28,7 +27,6 @@ class Album
   )
 end
 
-
 # app/models/artist.rb
 class Artist
   has_many(
@@ -40,6 +38,7 @@ class Artist
 
   def n_plus_one_tracks
     albums = self.albums
+
     tracks_count = {}
     albums.each do |album|
       tracks_count[album.name] = album.tracks.length
@@ -50,5 +49,13 @@ class Artist
 
   def better_tracks_query
     # TODO: your code here
+    albums = self.albums.includes(:tracks)
+
+    tracks_count = {}
+    albums.each do |album|
+      tracks.count[album.name] = album.tracks.length
+    end
+
+    tracks_count
   end
 end
