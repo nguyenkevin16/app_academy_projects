@@ -14,5 +14,13 @@ class Question < ActiveRecord::Base
   has_many :responses,
     through: :answer_choices,
     source: :responses
-    
+
+  def results
+    a = answer_choices.includes(:responses)
+    counts = {}
+    a.each do |choice|
+      counts[choice.body] = choice.responses.length
+    end
+    counts
+  end
 end
