@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   #   end
 
   resources :users, only: [:index, :show, :create, :destroy, :update]
+  resources :contacts, only: [:index, :show, :create, :destroy, :update]
 
   # get 'users/' => 'users#index'
   # post 'users/' => 'users#create'
