@@ -11,8 +11,8 @@
 #
 
 class Contact < ActiveRecord::Base
-  validates :name, :email, :user_id, presence: true
-  validates :user_id, uniqueness: { scope: :email }
+  validates :name, :email, :owner_id, presence: true
+  validates :owner_id, uniqueness: { scope: :email }
 
   belongs_to :owner,
     primary_key: :id,

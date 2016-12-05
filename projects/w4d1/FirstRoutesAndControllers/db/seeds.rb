@@ -18,4 +18,6 @@ Contact.create!(name: 'Luke', email: 'luke@aa.io', owner_id: 3)
 Contact.create!(name: 'Debra', email: 'debra@aa.io', owner_id: 2)
 Contact.create!(name: 'Gage', email: 'gage@aa.io', owner_id: 3)
 
-# ContactShare.create!(share_with_id: , contact_id: )
+ContactShare.create!(share_with_id: 1, contact_id: 4)
+ContactShare.create!(share_with_id: 3, contact_id: 7)
+ContactShare.create!(share_with_id: 1, contact_id: 6)
