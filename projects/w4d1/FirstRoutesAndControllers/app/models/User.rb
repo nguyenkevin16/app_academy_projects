@@ -11,12 +11,12 @@
 class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
 
-  has_many :contacts,
+  has_many :contacts, dependent: :destroy,
     primary_key: :id,
     foreign_key: :owner_id,
     class_name: :Contact
 
-  has_many :contact_shares,
+  has_many :contact_shares, dependent: :destroy,
     primary_key: :id,
     foreign_key: :share_with_id,
     class_name: :ContactShare
