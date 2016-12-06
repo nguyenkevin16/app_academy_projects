@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>NEW CAT!</title>
+  </head>
+
+  <body>
+    <!-- <% if action == :edit %>
+      <% action_url = cat_url(cat) %>
+    <% else %>
+      <% action_url = cats_url %>
+    <% end %> -->
+
+    <% action_url = (action == :edit ? cat_url(cat) : cats_url) %>
+
+    <form action="<%= action_url %>" method="post">
+      <% if action == :edit %>
+      <input type="hidden" name="_method" value="PATCH">
+      <% end %>
+
+      <label for="name">Name</label>
+      <input id="name" type="text" name="cat[name]" value="<%= cat.name %>">
+
+      <br><br>
+
+      <label for="gender">Gender</label> <br>
+      <input type="radio" name="cat[sex]" value="M"> Male<br>
+      <input type="radio" name="cat[sex]" value="F"> Female<br>
+
+      <br><br>
+
+      <label for="color">Color</label>
+      <select id="color" name="cat[color]">
+        <option disabled <%= cat.color ? "" : "selected"%>> -- Please Select -- </option>
+        <option value="black" <%= cat.color == "black" ? "selected" : "" %>>black</option>
+        <option value="brown" <%= cat.color == "brown" ? "selected" : "" %>>brown</option>
+        <option value="auburn" <%= cat.color == "auburn" ? "selected" : "" %>>auburn</option>
+        <option value="blonde" <%= cat.color == "blonde" ? "selected" : "" %>>blonde</option>
+        <option value="calico" <%= cat.color == "calico" ? "selected" : "" %>>calico</option>
+        <option value="white" <%= cat.color == "white" ? "selected" : "" %>>white</option>
+        <option value="grey" <%= cat.color == "grey" ? "selected" : "" %>>grey</option>
+        <option value="orange" <%= cat.color == "orange" ? "selected" : "" %>>orange</option>
+      </select>
+
+      <br><br>
+
+      <label for="date">Birthday</label>
+      <input id="date" type="date" name="cat[birth_date]" value="<%= cat.birth_date %>">
+
+      <br><br>
+
+      <label for="description">Description</label> <br>
+      <textarea name="cat[description]">
+        <%= cat.description %>
+      </textarea>
+
+      <br><br>
+       <input type="submit" value="<%= action == :edit ? 'update cat' : 'add cat'%>">
+    </form>
+
+  </body>
+</html>
