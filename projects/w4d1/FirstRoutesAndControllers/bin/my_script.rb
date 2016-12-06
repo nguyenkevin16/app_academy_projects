@@ -13,6 +13,17 @@ def index_users
   puts RestClient.get(url)
 end
 
+def index_contacts
+  url = Addressable::URI.new(
+    scheme: 'http',
+    host: 'localhost',
+    port: 3000,
+    path: '/users/1/contacts.html'
+  ).to_s
+
+  puts RestClient.get(url)
+end
+
 def create_user(name, email)
   url = Addressable::URI.new(
     scheme: 'http',
