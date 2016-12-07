@@ -8,4 +8,6 @@ NinetyNineCatsDay1::Application.routes.draw do
   root to: redirect("/cats")
 
   resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create, :destroy]
 end
