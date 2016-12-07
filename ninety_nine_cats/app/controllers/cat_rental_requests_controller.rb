@@ -9,8 +9,9 @@ class CatRentalRequestsController < ApplicationController
     @cat_rental_request = CatRentalRequest.new(cat_rental_requests_params)
 
     if @cat_rental_request.save
-      redirect_to cats_url
+      redirect_to "/cats/#{@cat_rental_request.cat_id}"
     else
+      @cats = Cat.all
       render :new
     end
   end

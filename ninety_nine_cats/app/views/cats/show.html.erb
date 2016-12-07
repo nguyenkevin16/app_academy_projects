@@ -6,6 +6,8 @@
   </head>
 
   <body>
+    <h4>CAT</h4>
+    
     <table>
       <tr>
         <th> Name </th>
@@ -23,5 +25,14 @@
         <td> <%= @cat.description %> </td>
       </tr>
     </table>
+
+    <h4>Rental requests</h4>
+
+    <ul>
+      <% @cat_rentals.each do |rental| %>
+        <li> <%= rental.start_date %> - <%= rental.end_date %> </li>
+      <% end %>
+    </ul>
+
   </body>
 </html>
