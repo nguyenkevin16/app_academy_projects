@@ -44,11 +44,26 @@ class CatRentalRequest < ActiveRecord::Base
   end
 
   def approve!
-    self.status = (self.overlapping_pending_requests.empty? ? "APPROVED" : "DENIED")
+    CatRentalRequest.transaction do
+      if overlapping_pending_requests.empty?
+        self.update_attributes(status: "APPROVED")
+      else
+        debugger
+        self.update_attributes(status: "APPROVED")
+        overlapping_pending_requests.each do |request|
+          request.update_attributes(status: "DENIED")
+          request.save!
+        end
+      end
+    end
   end
 
   def deny!
-    self.status = "DENIED"
+    self.update_attributes(status: "DENIED")
+  end
+
+  def pending?
+    status == "PENDING"
   end
 
   #private
