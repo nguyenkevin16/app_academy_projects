@@ -8,5 +8,6 @@
   <body>
     <%= @band.name %>
     <%= button_to "Edit", edit_band_url(@band), method: :get %>
+    <%= button_to "Delete", band_url(@band), method: :delete %>
   </body>
 </html>
