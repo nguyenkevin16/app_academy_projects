@@ -9,9 +9,10 @@
 
 <body>
   <% if logged_in? %>
-    <%= button_to "Log out", sessions_url, method: :delete %>
-    <%= button_to "Profile", user_url(current_user), method: :get %>
-    <br><br>
+    <%= button_to "Log out", sessions_url, method: :delete, form: {style: 'display:inline-block;'} %>
+    <%= button_to "Profile", user_url(current_user), method: :get, form: {style: 'display:inline-block;'} %>
+    <%= button_to "Bands", bands_url, method: :get, form: {style: 'display:inline-block;'} %>
+    <br>
   <% end %>
 
   <%= yield %>

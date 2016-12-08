@@ -9,18 +9,16 @@
     <%= link_to "Band page", band_url(@album.band), method: :get %>
 
     <h2> <%= @album.name %> </h2>
-    <ul>
-      <li><%= button_to "Edit album", edit_album_url(@album), method: :get %></li>
-      <li><%= button_to "Delete album", album_url(@album), method: :delete %></li>
-    </ul>
+    <%= button_to "Edit album", edit_album_url(@album), method: :get, form: {style: 'display:inline-block;'} %>
+    <%= button_to "Delete album", album_url(@album), method: :delete, form: {style: 'display:inline-block;'} %>
 
     <h2> Tracks! </h2>
+    <%= button_to "Create track!", new_track_url, method: :get, form: {style: 'display:inline-block;'} %>
+
     <ol>
       <% @album.tracks.each do |track| %>
         <li> <%= link_to "#{track.name}", track_url(track), method: :get %> </li>
       <% end %>
-
-      <%= button_to "Create track!", new_track_url, method: :get %>
     </ol>
   </body>
 </html>

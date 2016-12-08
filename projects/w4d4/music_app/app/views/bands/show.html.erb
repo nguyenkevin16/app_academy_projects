@@ -8,19 +8,19 @@
   <body>
     <%= link_to "Back to all bands", bands_url %>
 
-    <h2> <%= @band.name %> </h2>
-    <ul>
-      <li><%= button_to "Edit band", edit_band_url(@band), method: :get %></li>
-      <li><%= button_to "Delete band", band_url(@band), method: :delete %></li>
+    <h2> BAND NAME: <%= @band.name %> </h2>
+    <%= button_to "Edit band", edit_band_url(@band), method: :get, form: {style: 'display:inline-block;'} %>
+    <%= button_to "Delete band", band_url(@band), method: :delete, form: {style: 'display:inline-block;'} %>
+
     </ul>
 
-    <h4> Albums </h4>
+    <h3> Albums </h3>
+    <%= button_to "Create album", new_album_url, method: :get, form: {style: 'display:inline-block;'} %>
+
     <ul>
       <% @band.albums.each do |album| %>
         <li><%= link_to "#{album.name}", album_url(album), method: :get %></li>
       <% end %>
-
-      <li> <%= button_to "Create album", new_album_url, method: :get %> </li>
     </ul>
 
 

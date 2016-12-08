@@ -8,12 +8,9 @@
   <body>
     <%= link_to "Album page", album_url(@track.album), method: :get %>
 
-    <h2> <%= @track.name %> </h2>
-    <h3> <%= @track.track_type %> </h3>
-    <ul>
-      <li><%= button_to "Edit track", edit_track_url(@track), method: :get %></li>
-      <li><%= button_to "Delete track", track_url(@track), method: :delete %></li>
-    </ul>
+    <h3> Track name: <%= @track.name %> <%= @track.track_type == "bonus" ? " : BONUS" : "" %> </h3>
+    <%= button_to "Edit track", edit_track_url(@track), method: :get, form: {style: 'display:inline-block;'} %>
+    <%= button_to "Delete track", track_url(@track), method: :delete, form: {style: 'display:inline-block;'} %>
 
     <br><br>
 
