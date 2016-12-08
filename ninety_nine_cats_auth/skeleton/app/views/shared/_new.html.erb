@@ -9,6 +9,10 @@
 
     <%action_url = ( action == :login ? sessions_url : users_url)%>
 
+    <div class="error">
+      <%= flash[:messages] %>
+    </div>
+
     <form action="<%= action_url %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 

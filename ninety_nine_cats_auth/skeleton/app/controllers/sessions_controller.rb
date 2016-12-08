@@ -34,6 +34,10 @@ class SessionsController < ApplicationController
   end
 
   def logged_in_redirect
-    redirect_to cats_url if current_user
+    if current_user
+      flash[:messages] ||= []
+      flash[:messages] << "You're already logged in."
+      redirect_to cats_url
+    end
   end
 end

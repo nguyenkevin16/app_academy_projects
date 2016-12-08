@@ -50,7 +50,11 @@ class CatsController < ApplicationController
 
   private
   def not_logged_in_redirect
-    redirect_to new_user_url unless current_user
+    unless current_user
+      flash[:messages] ||= []
+      flash[:messages] << "Not logged in."
+      redirect_to new_user_url
+    end
   end
 
   def cat_params
