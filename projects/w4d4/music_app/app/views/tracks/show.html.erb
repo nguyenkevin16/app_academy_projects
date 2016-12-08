@@ -9,9 +9,27 @@
     <%= link_to "Album page", album_url(@track.album), method: :get %>
 
     <h2> <%= @track.name %> </h2>
+    <h3> <%= @track.track_type %> </h3>
     <ul>
       <li><%= button_to "Edit track", edit_track_url(@track), method: :get %></li>
       <li><%= button_to "Delete track", track_url(@track), method: :delete %></li>
     </ul>
+
+    <br><br>
+
+    <h3> Lyrics </h3>
+    <p> <%= @track.lyrics %> </p>
+
+    <br><br>
+
+    <h3> Notes </h3>
+
+    <ul>
+    <% @track.notes.each do |note| %>
+      <li><%= render "notes/note", note: note %></li>
+    <% end %>
+    </ul>
+
+    <%= render "notes/form", track: @track %>
   </body>
 </html>

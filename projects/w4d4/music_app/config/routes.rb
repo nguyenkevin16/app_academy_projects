@@ -62,5 +62,6 @@ Rails.application.routes.draw do
   resources :bands
   resources :albums, except: :index
   resources :tracks, except: :index
+  resources :notes, only: [:create, :destroy]
 
 end
