@@ -13,5 +13,14 @@
       <li><%= button_to "Edit album", edit_album_url(@album), method: :get %></li>
       <li><%= button_to "Delete album", album_url(@album), method: :delete %></li>
     </ul>
+
+    <h2> Tracks! </h2>
+    <ol>
+      <% @album.tracks.each do |track| %>
+        <li> <%= link_to "#{track.name}", track_url(track), method: :get %> </li>
+      <% end %>
+
+      <%= button_to "Create track!", new_track_url, method: :get %>
+    </ol>
   </body>
 </html>

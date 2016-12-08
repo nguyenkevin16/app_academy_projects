@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= @track.name %></title>
+  </head>
+
+  <body>
+    <%= link_to "Album page", album_url(@track.album), method: :get %>
+
+    <h2> <%= @track.name %> </h2>
+    <ul>
+      <li><%= button_to "Edit track", edit_track_url(@track), method: :get %></li>
+      <li><%= button_to "Delete track", track_url(@track), method: :delete %></li>
+    </ul>
+  </body>
+</html>
