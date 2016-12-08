@@ -22,4 +22,10 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !session[:session_token].nil?
   end
+
+  def not_logged_in_redirect
+    unless logged_in?
+      redirect_to new_sessions_url
+    end
+  end
 end

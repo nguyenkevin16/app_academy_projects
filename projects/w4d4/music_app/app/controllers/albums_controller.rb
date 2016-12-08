@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+  before_action :not_logged_in_redirect
+
   def show
     @album = Album.find(params[:id])
     render :show

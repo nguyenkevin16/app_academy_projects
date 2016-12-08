@@ -7,5 +7,9 @@
 
   <body>
     Welcome back, <%= @user.email %>!
+
+    <br><br>
+
+    <%= button_to "All bands", bands_url, method: :get %>
   </body>
 </html>

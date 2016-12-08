@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_action :not_logged_in_redirect
+
   def show
     @track = Track.find(params[:id])
     render :show
