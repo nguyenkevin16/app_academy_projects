@@ -6,8 +6,21 @@
   </head>
 
   <body>
-    <%= @band.name %>
-    <%= button_to "Edit", edit_band_url(@band), method: :get %>
-    <%= button_to "Delete", band_url(@band), method: :delete %>
+    <h2> <%= @band.name %> </h2>
+    <ul>
+      <li><%= button_to "Edit band", edit_band_url(@band), method: :get %></li>
+      <li><%= button_to "Delete band", band_url(@band), method: :delete %></li>
+    </ul>
+
+    <h4> Albums </h4>
+    <ul>
+      <% @band.albums.each do |album| %>
+        <li><%= link_to "#{album.name}", album_url(album), method: :get %></li>
+      <% end %>
+
+      <li> <%= button_to "Create album", new_album_url, method: :get %> </li>
+    </ul>
+
+
   </body>
 </html>
