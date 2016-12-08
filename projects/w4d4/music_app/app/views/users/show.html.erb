@@ -6,7 +6,6 @@
   </head>
 
   <body>
-    <%= @user.email %>
-    <%= button_to "Log out", sessions_url, method: :delete %>
+    Welcome back, <%= @user.email %>!
   </body>
 </html>
