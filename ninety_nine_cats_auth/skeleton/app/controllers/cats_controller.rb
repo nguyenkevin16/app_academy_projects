@@ -1,4 +1,6 @@
 class CatsController < ApplicationController
+  before_action :not_logged_in_redirect, only: [:edit, :update, :new, :create]
+
   def index
     @cats = Cat.all
     render :index
@@ -16,6 +18,9 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    user_id = current_user.id
+    @cat.user_id = user_id
+
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -25,12 +30,16 @@ class CatsController < ApplicationController
   end
 
   def edit
-    @cat = Cat.find(params[:id])
+    cats = current_user.cats
+    @cat = cats.find(params[:id])
+
     render :edit
   end
 
   def update
-    @cat = Cat.find(params[:id])
+    cats = current_user.cats
+    @cat = cats.find(params[:id])
+
     if @cat.update_attributes(cat_params)
       redirect_to cat_url(@cat)
     else
@@ -40,6 +49,9 @@ class CatsController < ApplicationController
   end
 
   private
+  def not_logged_in_redirect
+    redirect_to new_user_url unless current_user
+  end
 
   def cat_params
     params.require(:cat)

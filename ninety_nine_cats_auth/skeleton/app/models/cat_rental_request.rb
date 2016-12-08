@@ -16,6 +16,10 @@ class CatRentalRequest < ActiveRecord::Base
 
   belongs_to :cat
 
+  has_one :owner,
+    through: :cat,
+    source: :owner
+
   after_initialize :assign_pending_status
 
   validates(

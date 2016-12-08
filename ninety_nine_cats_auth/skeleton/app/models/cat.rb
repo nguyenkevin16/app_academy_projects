@@ -10,6 +10,7 @@
 #  description :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  user_id     :integer
 #
 
 require 'action_view'
@@ -25,6 +26,10 @@ class Cat < ActiveRecord::Base
     dependent: :destroy
   )
 
+  belongs_to :owner,
+  foreign_key: :user_id,
+  class_name: "User"
+
   validates(
     :birth_date,
     :color,
@@ -35,6 +40,7 @@ class Cat < ActiveRecord::Base
 
   validates :color, inclusion: CAT_COLORS
   validates :sex, inclusion: %w(M F)
+  validates :user_id, presence: true
 
   def age
     time_ago_in_words(birth_date)

@@ -1,7 +1,20 @@
 class CatRentalRequestsController < ApplicationController
   def approve
-    current_cat_rental_request.approve!
-    redirect_to cat_url(current_cat)
+    if current_cat_rental_request.owner == current_user
+      current_cat_rental_request.approve!
+      redirect_to cat_url(current_cat)
+    else
+      redirect_to cats_url
+    end
+  end
+
+  def deny
+    if current_cat_rental_request.owner == current_user
+      current_cat_rental_request.deny!
+      redirect_to cat_url(current_cat)
+    else
+      redirect_to cats_url
+    end
   end
 
   def create
@@ -12,11 +25,6 @@ class CatRentalRequestsController < ApplicationController
       flash.now[:errors] = @rental_request.errors.full_messages
       render :new
     end
-  end
-
-  def deny
-    current_cat_rental_request.deny!
-    redirect_to cat_url(current_cat)
   end
 
   def new

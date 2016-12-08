@@ -11,6 +11,8 @@
 #
 
 class User < ActiveRecord::Base
+  has_many :cats
+
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
   after_initialize :ensure_session_token
