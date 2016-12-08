@@ -37,8 +37,6 @@ class CatsController < ApplicationController
   end
 
   def update
-    cats = current_user.cats
-    @cat = cats.find(params[:id])
 
     if @cat.update_attributes(cat_params)
       redirect_to cat_url(@cat)
