@@ -54,6 +54,13 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  # users
   resources :users, only: [:new, :create, :show]
   resource :sessions, only: [:new, :create, :destroy]
+
+  # band/album/tracks
+  resources :bands
+  resources :albums, except: :index
+  resources :tracks, except: :index
+
 end
