@@ -5,7 +5,7 @@ class BandsController < ApplicationController
   end
 
   def show
-    @band.find(params[:id])
+    @band = Band.find(params[:id])
     render :show
   end
 
@@ -25,6 +25,7 @@ class BandsController < ApplicationController
   end
 
   def edit
+    @band = Band.find(params[:id])
     render :edit
   end
 

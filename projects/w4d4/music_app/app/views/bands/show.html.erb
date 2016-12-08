@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= @band.name %></title>
+  </head>
+
+  <body>
+    <%= @band.name %>
+    <%= button_to "Edit", edit_band_url(@band), method: :get %>
+  </body>
+</html>

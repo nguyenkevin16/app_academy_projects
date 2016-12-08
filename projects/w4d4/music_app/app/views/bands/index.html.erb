@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>All the bands!</title>
+  </head>
+
+  <body>
+    <h2> BANDS! </h2>
+
+    <% @bands.each do |band| %>
+      <%= link_to "#{band.name}", band_url(band) %>
+    <% end %>
+
+  </body>
+</html>
