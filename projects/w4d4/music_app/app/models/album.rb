@@ -17,4 +17,5 @@ class Album < ActiveRecord::Base
   validates :recorded_location, inclusion: RECORDED_LOCATION_TYPES
 
   belongs_to :band
+  has_many :tracks, dependent: :destroy
 end
