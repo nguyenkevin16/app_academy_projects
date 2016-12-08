@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
 
+  # user homepage
+  def show
+    @user = User.find(params[:id])
+    render :show
+  end
+
   # Form for creating a new user
   def new
     render :new
@@ -12,7 +18,7 @@ class UsersController < ApplicationController
     if @user.save
       # flash[:messages] = "Welcome Back"
       log_in!(@user)
-      # redirect_to
+      redirect_to user_url(@user)
     else
       # flash.now[:messages] = "Invalid "
       render :new
