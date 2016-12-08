@@ -6,6 +6,8 @@
   </head>
 
   <body>
+    <%= link_to "Back to all bands", bands_url %>
+
     <h2> <%= @band.name %> </h2>
     <ul>
       <li><%= button_to "Edit band", edit_band_url(@band), method: :get %></li>

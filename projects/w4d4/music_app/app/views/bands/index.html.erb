@@ -8,9 +8,11 @@
   <body>
     <h2> BANDS! </h2>
 
+    <ul>
     <% @bands.each do |band| %>
-      <%= link_to "#{band.name}", band_url(band) %>
+      <li> <%= link_to "#{band.name}", band_url(band) %> </li>
     <% end %>
+    </ul>
 
     <%= button_to "Create band!", new_band_url, method: :get %>
   </body>
