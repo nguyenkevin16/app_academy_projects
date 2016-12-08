@@ -2,13 +2,14 @@
 #
 # Table name: cat_rental_requests
 #
-#  id         :integer          not null, primary key
-#  cat_id     :integer          not null
-#  end_date   :date             not null
-#  start_date :date             not null
-#  status     :string           not null
-#  created_at :datetime
-#  updated_at :datetime
+#  id           :integer          not null, primary key
+#  cat_id       :integer          not null
+#  end_date     :date             not null
+#  start_date   :date             not null
+#  status       :string           not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#  requester_id :integer
 #
 
 class CatRentalRequest < ActiveRecord::Base
@@ -20,6 +21,10 @@ class CatRentalRequest < ActiveRecord::Base
     through: :cat,
     source: :owner
 
+  belongs_to :requester,
+    foreign_key: :requester_id,
+    class_name: "User"
+
   after_initialize :assign_pending_status
 
   validates(
@@ -27,6 +32,7 @@ class CatRentalRequest < ActiveRecord::Base
     :end_date,
     :start_date,
     :status,
+    :requester_id,
     presence: true
   )
   validates :status, inclusion: STATUS_STATES

@@ -13,6 +13,10 @@
 class User < ActiveRecord::Base
   has_many :cats
 
+  has_many :rental_requests,
+    foreign_key: :requester_id,
+    class_name: "CatRentalRequest"
+
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
   after_initialize :ensure_session_token
