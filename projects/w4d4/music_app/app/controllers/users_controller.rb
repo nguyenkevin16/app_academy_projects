@@ -16,11 +16,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      # flash[:messages] = "Welcome Back"
       log_in!(@user)
       redirect_to user_url(@user)
     else
-      # flash.now[:messages] = "Invalid "
+      flash.now[:errors] = @user.errors.full_messages
       render :new
     end
   end

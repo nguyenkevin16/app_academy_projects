@@ -31,8 +31,8 @@
       <br><br>
 
       <label for="location">Studio/Live</label><br>
-      <input type="radio" name="album[recorded_location]" value="studio" <%= "checked" if album.recorded_location == :studio %>> Studio <br>
-      <input type="radio" name="album[recorded_location]" value="live" <%= "checked" if album.recorded_location == :live %>> Live
+      <input type="radio" name="album[recorded_location]" value="studio" <%= "checked" if album.recorded_location == "studio" %>> Studio <br>
+      <input type="radio" name="album[recorded_location]" value="live" <%= "checked" if album.recorded_location == "live" %>> Live
 
       <br><br>
 
