@@ -17,6 +17,11 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :subs,
+  foreign_key: :moderator_id,
+  class_name: :Sub
+
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
