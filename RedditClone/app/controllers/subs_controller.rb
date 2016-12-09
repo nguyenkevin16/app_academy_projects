@@ -1,6 +1,6 @@
 class SubsController < ApplicationController
-
   before_filter :require_signed_in
+  before_filter :require_moderator, only: [:edit, :update]
 
   def index
     @subs = Sub.all
@@ -53,5 +53,13 @@ class SubsController < ApplicationController
 
   def sub_params
     params.require(:sub).permit(:title, :description)
+  end
+
+  def require_moderator
+    @sub = Sub.find(params[:id])
+    unless current_user.id == @sub.moderator_id
+      flash[:errors] = ["No access to edit."]
+      redirect_to sub_url(@sub)
+    end
   end
 end
