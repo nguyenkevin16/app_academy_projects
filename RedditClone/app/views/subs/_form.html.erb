@@ -13,13 +13,17 @@
     <input type="hidden" name="_method" value="patch">
   <% end %>
 
-  <label>Title
+  <label>Title<br>
     <input type="text" name="sub[title]" value= "<%= sub.title %>">
   </label>
 
-  <label>Description
+  <br><br>
+
+  <label>Description<br>
     <textarea name="sub[description]"><%= sub.description %></textarea>
   </label>
+
+  <br><br>
 
   <input type="submit" value="<%= action == :edit ? "Edit" : "Create"%>">
 </form>

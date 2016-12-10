@@ -1,12 +1,14 @@
 <h1><%= @sub.title %></h1>
 
 <section>
+  <h3>Description</h3>
   <p><%= @sub.description %></p>
   <!-- Add link to edit sub if owner of sub is user -->
 </section>
 
 <section>
   <!-- Unordered list to posts -->
+  <h3>Posts</h3>
   <ul>
   <% @sub.posts.each do |post| %>
     <li><%= link_to "#{post.title}", post_url(post), method: :get %></li>
@@ -17,5 +19,7 @@
 </section>
 
 <footer>
+  <br><br>
+  <h3>Links</h3>
   <%= link_to "Sub List", subs_url, method: :get %>
 </footer>

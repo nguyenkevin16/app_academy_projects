@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
   foreign_key: :author_id,
   class_name: :Post
 
+  has_many :posted_subs,
+    through: :posts,
+    source: :subs
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
