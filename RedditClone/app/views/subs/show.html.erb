@@ -7,7 +7,13 @@
 
 <section>
   <!-- Unordered list to posts -->
+  <ul>
+  <% @sub.posts.each do |post| %>
+    <li><%= link_to "#{post.title}", post_url(post), method: :get %></li>
+  <% end %>
+  </ul>
   <!-- Create a post link -->
+  <%= button_to "Create post", new_post_url, method: :get %>
 </section>
 
 <footer>

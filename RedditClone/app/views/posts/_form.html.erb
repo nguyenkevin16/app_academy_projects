@@ -17,20 +17,28 @@
     <input type="text" name="post[title]" value= "<%= post.title %>">
   </label>
 
+  <br><br>
+
   <label>Content
     <textarea name="post[content]"><%= post.content %></textarea>
   </label>
 
+  <br><br>
+
   <label>Subs</label>
-  <input type="hiden" name="post[sub_ids][]" value="">
+
+  <br><br>
+
+  <input type="hidden" name="post[sub_ids][]" value="">
   <% subs.each do |sub| %>
     <label><%= sub.title %>
       <input type="checkbox"
               name="post[sub_ids][]"
               value="<%= sub.id %>"
               <%= "checked" if post.sub_ids.include?(sub.id) %>>
-    </label>
+    </label><br>
   <% end %>
 
+  <br><br>
   <input type="submit" value="<%= action == :edit ? "Edit" : "Create"%>">
 </form>
