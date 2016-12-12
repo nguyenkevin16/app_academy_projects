@@ -3,12 +3,12 @@
 <form action="<%= users_url %>" method="post">
   <%= auth_token %>
 
-  <label>Username
-    <input type="text" name="user[username]" value= "<%= @user.username %>">
+  <label for="username">Username
+    <input id="username" type="text" name="user[username]" value= "<%= @user.username %>">
   </label>
 
-  <label>Password
-    <input type="password" name="user[password]" value= "<%= @user.password %>">
+  <label for="password">Password
+    <input id="password" type="password" name="user[password]" value= "<%= @user.password %>">
   </label>
 
   <input type="submit" value="Signup">
