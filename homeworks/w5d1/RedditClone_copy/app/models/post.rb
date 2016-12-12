@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  title      :string           not null
-#  url        :string           not null
+#  url        :string
 #  content    :text             not null
 #  author_id  :integer          not null
 #  created_at :datetime         not null
