@@ -9,11 +9,15 @@
 <body>
 
 <% if logged_in? %>
-  Welcome back <%= current_user.username %>
+  <%= button_to "Homepage", goals_url, method: :get %>
+  <%= button_to "Sign Out", sessions_url, method: :delete %>
+
+  <br>Welcome back, <%= current_user.username %>!
 <% else %>
   <%= link_to "Sign In", new_sessions_url, method: :get %>
   <%= link_to "Sign Up", new_user_url, method: :get %>
 <% end %>
+
 <%= yield %>
 
 </body>

@@ -109,6 +109,20 @@ def sign_up_as_hairy_potter
   sign_up("hairy_potter")
 end
 
+def sign_up_as_luke_skywalker
+  visit new_user_url
+  fill_in "Username", with: "luke"
+  fill_in "Password", with: 'skywalker'
+  click_button 'Sign Up'
+end
+
+def sign_in_as_luke_skywalker
+  visit new_sessions_url
+  fill_in "Username", with: "luke"
+  fill_in "Password", with: 'skywalker'
+  click_button 'Sign In'
+end
+
 def create_luke_with_link
   let(:luke) { User.create!(username: 'luke', password: 'skywalker') }
   let(:luke_link) { luke.goals.create!(body: 'defeat darth vader') }

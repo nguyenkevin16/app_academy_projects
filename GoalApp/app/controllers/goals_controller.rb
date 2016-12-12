@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
   before_action :ensure_logged_in
 
   def new
-
+    @goal = Goal.new
   end
 
   def create
@@ -42,9 +42,9 @@ class GoalsController < ApplicationController
 
   def destroy
     @goal = Goal.find(params[:id])
-    user = @goal.user
+    user_id = @goal.user_id
     @goal.destroy
-    redirect_to user_url(user)
+    redirect_to goals_url
   end
 
   private

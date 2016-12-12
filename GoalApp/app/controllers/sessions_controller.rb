@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 
     if user
       log_in(user)
-      redirect_to new_sessions_url
+      redirect_to goals_url
     else
       flash.now[:errors] = ["Not valid username/password"]
       render :new

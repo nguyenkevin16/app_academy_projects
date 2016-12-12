@@ -1,0 +1,13 @@
+<body>
+
+  <br><br>
+
+  <h3>Goal Description</h3>
+  <p><%= @goal.body %></p>
+
+  <br><br>
+
+  <%= button_to "Edit Goal", edit_goal_url(@goal), method: :get %>
+  <%= button_to "Remove Goal", goal_url(@goal), method: :delete %>
+  <%= button_to "Goals", goals_url, method: :get %>
+</body>

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     if user.save
       log_in(user)
-      redirect_to new_user_url
+      redirect_to goals_url
     else
       flash[:errors] = user.errors.full_messages
       render :new
