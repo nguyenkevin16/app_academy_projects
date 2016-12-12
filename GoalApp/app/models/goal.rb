@@ -12,7 +12,8 @@
 #
 
 class Goal < ActiveRecord::Base
-  validates :body, :user, :privacy, :complete, presence: true
+  validates :body, :user, presence: true
+  validates :complete, :privacy, inclusion: { in: [true, false] }
 
   belongs_to :user
 end
