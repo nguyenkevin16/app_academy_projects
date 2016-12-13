@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome back!</title>
+  </head>
+
+  <body>
+    Welcome back, <%= @user.email %>!
+
+    <br><br>
+
+    <%= button_to "All bands", bands_url, method: :get %>
+  </body>
+</html>

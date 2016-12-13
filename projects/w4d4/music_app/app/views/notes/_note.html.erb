@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <p> <%= note.body %> - <%= note.user.email %> </p>
+    <% if note.user == current_user %>
+      <%= button_to "Delete note", note_url(note), method: :delete %>
+    <% end %>
+  </body>
+</html>
