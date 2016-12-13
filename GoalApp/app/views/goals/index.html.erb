@@ -3,7 +3,9 @@
 
   <ul>
     <% @goals.each do |goal| %>
-      <li><%= link_to "#{goal.body}", goal_url(goal), method: :get %></li>
+      <% if goal.user == current_user || goal.privacy == false %>
+        <li><%= link_to "#{goal.body}", goal_url(goal), method: :get %></li>
+      <% end %>
     <% end %>
 
   </ul>
