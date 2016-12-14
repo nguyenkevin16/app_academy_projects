@@ -55,3 +55,23 @@ function mysteryScoping5() {
   let x = 'out of block again';
   console.log(x);
 }
+
+
+
+
+let madlib = function(verb, adjective, noun) {
+  return `We shall ${verb} the ${adjective} ${noun}`;
+};
+
+
+
+
+
+let string_one = 'hello';
+let string_two = 'ello';
+
+let isSubstring = (searchString, subString) => {
+  return searchString.includes(subString);
+};
+
+isSubstring(string_one, string_two);
