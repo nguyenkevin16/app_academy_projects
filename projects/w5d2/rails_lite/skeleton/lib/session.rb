@@ -8,6 +8,7 @@ class Session
     cookies = req.cookies
 
     if cookies.key?("_rails_lite_app")
+      debugger
       @session = JSON.parse(cookies["_rails_lite_app"])
     else
       @session = {}
