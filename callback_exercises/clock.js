@@ -9,7 +9,7 @@ class Clock {
     // 3. Call printTime.
     // this.printTime();
     // 4. Schedule the tick at 1 second intervals.
-    window.setInterval(this._tick.bind(this), 1000);
+    setInterval(this._tick.bind(this), 1000);
   }
 
   printTime() {
