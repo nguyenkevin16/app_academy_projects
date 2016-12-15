@@ -6,7 +6,10 @@ const reader = readline.createInterface({
 });
 
 function addNumbers(sum, numsLeft, completionCallback) {
-  if (numsLeft === 0) { return completionCallback(sum); }
+  if (numsLeft === 0) {
+    reader.close();
+    return completionCallback(sum);
+  }
 
   if (numsLeft > 0) {
     reader.question("Please enter a number:", (answer) => {
