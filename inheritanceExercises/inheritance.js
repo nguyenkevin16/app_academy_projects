@@ -19,10 +19,10 @@ Ship.prototype.sh = function() {
 };
 
 function Asteroid () {}
-Asteroid.inherits(MovingObject);
 Asteroid.prototype.fly = function() {
   console.log("I can fly");
 };
+Asteroid.inherits(MovingObject);
 
 let mo = new MovingObject();
 let s = new Ship();
