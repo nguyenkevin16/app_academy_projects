@@ -1,10 +1,3 @@
-const canvasEl = document.getElementsByTagName("canvas")[0];
-canvasEl.height = window.innerHeight;
-canvasEl.width = window.innerWidth;
-
-const ctx2 = canvasEl.getContext("2d");
-
-
 function MovingObject(options) {
   this.pos = options['pos'];
   this.vel = options['vel'];
@@ -32,3 +25,5 @@ MovingObject.prototype.move = function() {
   this.pos[0] += this.vel[0];
   this.pos[1] += this.vel[1];
 };
+
+module.exports = MovingObject;
