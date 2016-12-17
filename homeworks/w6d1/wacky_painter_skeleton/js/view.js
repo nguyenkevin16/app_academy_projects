@@ -23,6 +23,7 @@ View.prototype.exercise1 = function () {
   //Result: Every square should turn orange (we already have a CSS rule)
 
   //your code here!
+  $('.square').addClass("orange");
 };
 
 View.prototype.exercise2 = function () {
@@ -30,6 +31,7 @@ View.prototype.exercise2 = function () {
   //Result: Every square vanishes
 
   //your code here!
+  $('.square').remove();
 };
 
 View.prototype.exercise3 = function () {
@@ -37,6 +39,8 @@ View.prototype.exercise3 = function () {
   //Result: An <h1> with the text 'i love jquery' appears under the grid.
 
   //your code here!
+  const $iLoveJquery = $("<h1>i love jquery</h1>");
+  $('body').append($iLoveJquery);
 };
 
 View.prototype.exercise4 = function () {
@@ -44,6 +48,7 @@ View.prototype.exercise4 = function () {
   //Result: Your name appears in every other square.
 
   //your code here!
+  $('.square').each((square) => square.text('Kevin'));
 };
 
 View.prototype.exercise5 = function () {
