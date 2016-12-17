@@ -1,10 +1,5 @@
 const asteroid = require('./asteroid.js');
 
-const canvasEl = document.getElementsByTagName("canvas")[0];
-canvasEl.height = window.innerHeight;
-canvasEl.width = window.innerWidth;
-const ctx = canvasEl.getContext("2d");
-
 function Game () {
   this.DIM_X = window.innerWidth;
   this.DIM_Y = window.innerHeight;
@@ -28,15 +23,13 @@ Game.prototype.randomPosition = function() {
   return [x, y];
 };
 
-Game.prototype.draw = function(ctx3) {
-  ctx3.clearRect(0, 0, this.DIM_X, this.DIM_Y);
-  this.asteroids.forEach((ast) => ast.draw(ctx3));
+Game.prototype.draw = function(ctx) {
+  ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
+  this.asteroids.forEach((ast) => ast.draw(ctx));
 };
 
 Game.prototype.moveObjects = function() {
   this.asteroids.forEach((ast) => ast.move());
 };
 
-let game = new Game();
-game.draw(ctx);
-game.moveObjects();
+module.exports = Game;

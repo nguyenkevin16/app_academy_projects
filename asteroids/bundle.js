@@ -44,12 +44,45 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const asteroid = __webpack_require__(1);
+	const gameView = __webpack_require__(1);
 
-	const canvasEl = document.getElementsByTagName("canvas")[0];
-	canvasEl.height = window.innerHeight;
-	canvasEl.width = window.innerWidth;
-	const ctx = canvasEl.getContext("2d");
+	document.addEventListener("DOMContentLoaded", () => {
+	  const canvasEl = document.getElementById("game-canvas");
+	  canvasEl.height = window.innerHeight;
+	  canvasEl.width = window.innerWidth;
+	  const ctx = canvasEl.getContext("2d");
+
+	  const game = new gameView(ctx);
+	  game.start();
+	});
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const game = __webpack_require__(2);
+
+	function GameView(ctx) {
+	  this.game = new game();
+	  this.ctx = ctx;
+	}
+
+	GameView.prototype.start = function() {
+	  window.setInterval(() => {
+	    this.game.draw(this.ctx);
+	    this.game.moveObjects();
+	  }, 20);
+	};
+
+	module.exports = GameView;
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const asteroid = __webpack_require__(3);
 
 	function Game () {
 	  this.DIM_X = window.innerWidth;
@@ -74,26 +107,24 @@
 	  return [x, y];
 	};
 
-	Game.prototype.draw = function(ctx3) {
-	  ctx3.clearRect(0, 0, this.DIM_X, this.DIM_Y);
-	  this.asteroids.forEach((ast) => ast.draw(ctx3));
+	Game.prototype.draw = function(ctx) {
+	  ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
+	  this.asteroids.forEach((ast) => ast.draw(ctx));
 	};
 
 	Game.prototype.moveObjects = function() {
 	  this.asteroids.forEach((ast) => ast.move());
 	};
 
-	let game = new Game();
-	game.draw(ctx);
-	game.moveObjects();
+	module.exports = Game;
 
 
 /***/ },
-/* 1 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const utils = __webpack_require__(2);
-	const movingObjects = __webpack_require__(3);
+	const utils = __webpack_require__(4);
+	const movingObjects = __webpack_require__(5);
 
 	function asteroid(pos) {
 
@@ -110,7 +141,7 @@
 
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports) {
 
 	const Util = {
@@ -138,7 +169,7 @@
 
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports) {
 
 	function MovingObject(options) {
