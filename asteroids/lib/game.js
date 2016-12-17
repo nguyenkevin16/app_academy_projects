@@ -28,8 +28,15 @@ Game.prototype.randomPosition = function() {
   return [x, y];
 };
 
-
 Game.prototype.draw = function(ctx3) {
-  ctx3.clearRect();
+  ctx3.clearRect(0, 0, this.DIM_X, this.DIM_Y);
   this.asteroids.forEach((ast) => ast.draw(ctx3));
 };
+
+Game.prototype.moveObjects = function() {
+  this.asteroids.forEach((ast) => ast.move());
+};
+
+let game = new Game();
+game.draw(ctx);
+game.moveObjects();
