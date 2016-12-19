@@ -48,7 +48,7 @@ View.prototype.exercise4 = function () {
   //Result: Your name appears in every other square.
 
   //your code here!
-  $('.square').each((square) => square.text('Kevin'));
+  $('.square:nth-child(even)').text('Kevin');
 };
 
 View.prototype.exercise5 = function () {
@@ -60,6 +60,10 @@ View.prototype.exercise5 = function () {
   //  'data-pos' of every square
 
   //your code here!
+  $('.square').on("click", event => {
+    const $currentTarget = $(event.currentTarget);
+    alert($currentTarget.attr('data-pos'));
+  });
 };
 
 View.prototype.exercise6 = function () {
