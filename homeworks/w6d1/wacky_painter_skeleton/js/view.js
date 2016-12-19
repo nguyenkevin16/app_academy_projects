@@ -74,6 +74,10 @@ View.prototype.exercise6 = function () {
   //hint: use window._randomColorString() (defined at top) to get a random color!
 
   //your code here!
+  $('.square').each((idx, el) => {
+    let $sq = $(el);
+    $sq.css('background-color', window._randomColorString());
+  });
 };
 
 View.prototype.exercise7 = function(){
@@ -84,6 +88,10 @@ View.prototype.exercise7 = function(){
   //rainbow.
 
   //your code here!
+  $('.square').on('mouseover', event => {
+    const $sq = $(event.currentTarget);
+    console.log($sq.css('background-color'));
+  });
 };
 
 
