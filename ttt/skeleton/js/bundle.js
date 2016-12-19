@@ -70,15 +70,30 @@
 	  bindEvents() {
 	    this.$el.on('click', 'li', e => {
 	      const $currentTarget = $(e.currentTarget);
-	      const arr = $currentTarget.attr('data-pos').split(",");
-	      const pos = arr.map((el) => parseInt(el));
-
-	      this.game.playMove(pos);
-	      $currentTarget.append(this.game.currentPlayer);
+	      this.makeMove($currentTarget);
 	    });
 	  }
 
-	  makeMove($square) {}
+	  makeMove($square) {
+	    const arr = $square.attr('data-pos').split(",");
+	    const pos = arr.map((el) => parseInt(el));
+	    console.log(this.game.board);
+
+	    if (this.game.board.isEmptyPos(pos)) {
+	      $square.append(this.game.currentPlayer);
+	      this.game.playMove(pos);
+	      $square.attr('style', 'background-color: white');
+	    } else {
+	      alert("Invalid move.");
+	    }
+
+	    if (this.game.isOver()) {
+	      const $winner = $("<h3></h3>");
+	      $winner.append(`Congratulations, ${this.game.winner()}, you have won!`);
+
+	      this.$el.append($winner);
+	    }
+	  }
 
 	  setupBoard() {
 	    const newUnorderedList = $('<ul></ul>');
