@@ -1,0 +1,67 @@
+h1, ul, li, body, section, p {
+  padding: 0;
+  margin: 0;
+
+}
+
+h1 {
+  font-family: fantasy;
+  font-weight: 100;
+  text-align: center;
+  font-size: 500%;
+  margin: 100px auto;
+}
+
+.hanoi {
+  /*border: 2px solid black;*/
+  width: 600px;
+  /*height: 150px;*/
+  margin: 0px auto 0px auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+
+ul {
+  margin: 0px auto;
+  width: 180px;
+  height: 90px;
+
+  list-style-type: none;
+  border-bottom: 10px solid black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+ul:hover {
+  border-color: blue;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  width: 0px;
+  margin: 10px auto;
+  height: 50px;
+  background: gray;
+  border-radius: 25px;
+}
+
+li#1.discs {
+  width: 60px;
+}
+
+li#2.discs {
+  width: 120px;
+}
+
+li#3.discs {
+  width: 180px;
+}
+
+p {
+  flex: 1 100%;
+}
