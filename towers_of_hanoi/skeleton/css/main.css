@@ -4,7 +4,7 @@ h1, ul, li, body, section, p {
 
 }
 
-h1 {
+h1, p {
   font-family: fantasy;
   font-weight: 100;
   text-align: center;
@@ -43,25 +43,23 @@ ul:hover {
 li {
   display: flex;
   justify-content: center;
+  color: white;
+
   width: 0px;
-  margin: 10px auto;
-  height: 50px;
+  margin: 5px auto;
+  height: 75px;
   background: gray;
   border-radius: 25px;
 }
 
-li#1.discs {
+li[id='1'].discs {
   width: 60px;
 }
 
-li#2.discs {
+li[id='2'].discs {
   width: 120px;
 }
 
-li#3.discs {
+li[id='3'].discs {
   width: 180px;
-}
-
-p {
-  flex: 1 100%;
 }

@@ -25,7 +25,7 @@ class HanoiView {
     for (let i = 0; i < this.game.towers.length; i++) {
       for (let j = 2; j >= 0; j--) {
         let li = $('<li class="discs"></li>');
-        li.text(this.game.towers[i][j]);
+        // li.text(this.game.towers[i][j]);
         li.attr("id", this.game.towers[i][j]);
         $towers[i].append(li[0]);
       }
@@ -52,7 +52,8 @@ class HanoiView {
       this.render();
 
       if (this.game.isWon()) {
-        this.$dom.append("<p>Congratulations, you are AWESOME!</p>");
+        $('body').append("<p>Congratulations, you are AWESOME!</p>");
+        $('li').attr('style', 'background-color: green');
       }
     });
   }
