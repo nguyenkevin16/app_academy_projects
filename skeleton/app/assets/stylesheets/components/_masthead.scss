@@ -3,7 +3,12 @@
 	flex-direction: column;
 	align-items: center;
 	border-bottom: 2px solid black;
+	border-top: 1px solid $light-gray;
 	position: relative;
+}
+
+.masthead a:hover {
+	text-decoration: underline;
 }
 
 .language-nav {
@@ -29,6 +34,10 @@
 	display: flex;
 }
 
+.language-nav li:first-child {
+	font-weight: bold;
+}
+
 .logo {
 	max-width: 400px;
 	margin-top: 10px;
@@ -45,6 +54,10 @@
 .masthead-links li {
 	margin-left: 10px;
 	border-right: 1px solid $light-gray;
+}
+
+.masthead-links li:last-child {
+	border-right: none;
 }
 
 .masthead-links button {
