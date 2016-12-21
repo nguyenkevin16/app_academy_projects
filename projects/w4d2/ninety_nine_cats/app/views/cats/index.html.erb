@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CATS!</title>
+  </head>
+
+  <body>
+    <% @cats.each do |cat| %>
+      <%= link_to "#{cat.name}", cat_url(cat) %>
+    <% end %>
+  </body>
+</html>
