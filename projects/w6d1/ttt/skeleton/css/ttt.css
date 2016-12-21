@@ -1,0 +1,29 @@
+ul {
+  width: 462px;
+  height: 462px;
+  margin: 50px auto;
+}
+
+li {
+  float: left;
+  width: 150px;
+  height: 150px;
+
+  background-color: grey;
+  border: 2px solid black;
+
+  list-style-type: none;
+  font-family: Helvetica;
+  text-align: center;
+  font-size: 500%;
+}
+
+li:hover {
+  background-color: yellow;
+}
+
+h1, h3 {
+  font-family: helvetica;
+  font-size: 30px;
+  text-align: center;
+}
