@@ -77,6 +77,8 @@
 	    } else {
 	      APIUtil.unfollowUser(this.userId, this.toggleStateAndRender.bind(this));
 	    }
+	
+	    this.$el.prop('disabled', true);
 	  }
 	
 	  toggleStateAndRender() {
@@ -90,6 +92,8 @@
 	    } else if (this.followState === "followed") {
 	      this.$el.html("Unfollow!");
 	    }
+	
+	    this.$el.prop('disabled', false);
 	  }
 	
 	  toggleState() {
