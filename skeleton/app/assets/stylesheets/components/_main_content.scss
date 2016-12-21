@@ -1,0 +1,74 @@
+.main-content {
+  font-family: $serif;
+  margin-top: 15px;
+}
+
+.main-content h1 {
+  font-weight: bold;
+  font-size: 105%;
+}
+
+.main-content h2 {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+
+.main-content .author {
+  font-size: 105%;
+  color: $gray;
+}
+
+.main-content li {
+  list-style: disc outside;
+  margin-left: 1.5em;
+}
+
+.main-content #main-title {
+  font-size: 200%;
+  font-style: italic;
+}
+
+.main-content .comment-link {
+  color: $blue;
+}
+
+.main-content img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.main-content .thumbnail {
+  height: 100px;
+}
+
+.main-content .middle-frame {
+  border-bottom: 1px solid $light-gray;
+}
+
+.main-content #opinion-pages {
+  text-align: center;
+}
+
+[class*='col-'] h1, h2, li, p, div {
+  margin: 5px;
+}
+
+.main-content h1:hover {
+  text-decoration: underline;
+}
+
+.main-content .comment-link:hover {
+  text-decoration: underline;
+}
+
+.main-content button:hover {
+  background-color: $darkest-blue;
+  border: 50px black;
+}
+
+.main-content .sign-up {
+  border: 5px solid $dark-gray;
+  // border-color: $dark-gray;
+  // background-color: purple;
+}
