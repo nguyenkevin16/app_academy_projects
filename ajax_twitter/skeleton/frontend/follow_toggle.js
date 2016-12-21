@@ -1,3 +1,5 @@
+const APIUtil = require('./api_util.js');
+
 class FollowToggle {
   constructor(el) {
     this.$el = $(el);
@@ -8,41 +10,27 @@ class FollowToggle {
     this.$el.on('click', this.handleClick.bind(this));
   }
 
+  handleClick(e) {
+    e.preventDefault();
+
+    if (this.followState === "unfollowed") {
+      APIUtil.followUser(this.userId, this.toggleStateAndRender.bind(this));
+    } else {
+      APIUtil.unfollowUser(this.userId, this.toggleStateAndRender.bind(this));
+    }
+  }
+
+  toggleStateAndRender() {
+    this.toggleState();
+    this.render();
+  }
+
   render() {
     if (this.followState === "unfollowed") {
       this.$el.html("Follow!");
     } else if (this.followState === "followed") {
       this.$el.html("Unfollow!");
     }
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-
-    if (this.followState === "unfollowed") {
-      $.ajax({
-        type: "POST",
-        url: `/users/${this.userId}/follow`,
-        dataType: 'json',
-
-        success: (data) => { toggleStateAndRender(data); },
-        error: () => { console.log('Follow Error'); }
-      });
-    } else {
-      $.ajax({
-        type: "DELETE",
-        url: `/users/${this.userId}/follow`,
-        dataType: 'json',
-
-        success: (data) => { toggleStateAndRender(data); },
-        error: () => { console.log('Unfollow Error'); }
-      });
-    }
-
-    const toggleStateAndRender = (data) => {
-      this.toggleState();
-      this.render();
-    };
   }
 
   toggleState() {

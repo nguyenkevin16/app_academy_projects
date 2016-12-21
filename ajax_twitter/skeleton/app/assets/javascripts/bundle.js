@@ -55,8 +55,10 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	const APIUtil = __webpack_require__(2);
+	
 	class FollowToggle {
 	  constructor(el) {
 	    this.$el = $(el);
@@ -67,41 +69,27 @@
 	    this.$el.on('click', this.handleClick.bind(this));
 	  }
 	
+	  handleClick(e) {
+	    e.preventDefault();
+	
+	    if (this.followState === "unfollowed") {
+	      APIUtil.followUser(this.userId, this.toggleStateAndRender.bind(this));
+	    } else {
+	      APIUtil.unfollowUser(this.userId, this.toggleStateAndRender.bind(this));
+	    }
+	  }
+	
+	  toggleStateAndRender() {
+	    this.toggleState();
+	    this.render();
+	  }
+	
 	  render() {
 	    if (this.followState === "unfollowed") {
 	      this.$el.html("Follow!");
 	    } else if (this.followState === "followed") {
 	      this.$el.html("Unfollow!");
 	    }
-	  }
-	
-	  handleClick(e) {
-	    e.preventDefault();
-	
-	    if (this.followState === "unfollowed") {
-	      $.ajax({
-	        type: "POST",
-	        url: `/users/${this.userId}/follow`,
-	        dataType: 'json',
-	
-	        success: (data) => { toggleStateAndRender(data); },
-	        error: () => { console.log('Follow Error'); }
-	      });
-	    } else {
-	      $.ajax({
-	        type: "DELETE",
-	        url: `/users/${this.userId}/follow`,
-	        dataType: 'json',
-	
-	        success: (data) => { toggleStateAndRender(data); },
-	        error: () => { console.log('Unfollow Error'); }
-	      });
-	    }
-	
-	    const toggleStateAndRender = (data) => {
-	      this.toggleState();
-	      this.render();
-	    };
 	  }
 	
 	  toggleState() {
@@ -114,6 +102,33 @@
 	}
 	
 	module.exports = FollowToggle;
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	const APIUtil = {
+	  followUser(id, success) {
+	    $.ajax({
+	      type: "POST",
+	      url: `/users/${id}/follow`,
+	      dataType: 'json',
+	      success: success
+	    });
+	  },
+	
+	  unfollowUser(id, success) {
+	    $.ajax({
+	      type: "DELETE",
+	      url: `/users/${id}/follow`,
+	      dataType: 'json',
+	      success: success
+	    });
+	  }
+	};
+	
+	module.exports = APIUtil;
 
 
 /***/ }
