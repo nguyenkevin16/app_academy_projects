@@ -1,6 +1,8 @@
 .main-content {
   font-family: $serif;
   margin-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid $light-gray;
 }
 
 .main-content h1 {
@@ -68,7 +70,25 @@
 }
 
 .main-content .sign-up {
-  border: 5px solid $dark-gray;
-  // border-color: $dark-gray;
-  // background-color: purple;
+  border: 1px solid $dark-gray;
+  border-right: none;
+}
+
+.main-content button {
+  float: right;
+}
+
+.main-content input {
+  width: 50%;
+  margin: 8px;
+  color: $gray;
+  font-family: $sans-serif;
+}
+
+.main-content h6 {
+  text-align: center;
+  color: $gray;
+  font-size: 85%;
+  font-family: $sans-serif;
+  font-weight: 100;
 }
