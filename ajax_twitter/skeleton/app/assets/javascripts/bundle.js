@@ -47,8 +47,8 @@
 	const FollowToggle = __webpack_require__(1);
 	
 	$(() => {
-	  $("button.follow-toggle").each((idx, button)=>{
-	    new FollowToggle(button);
+	  $("button.follow-toggle").each((idx, el)=>{
+	    new FollowToggle(el);
 	  });
 	});
 
@@ -70,7 +70,7 @@
 	  render() {
 	    if (this.followState === "unfollowed") {
 	      this.$el.html("Follow!");
-	    } else {
+	    } else if (this.followState === "followed") {
 	      this.$el.html("Unfollow!");
 	    }
 	  }
@@ -79,48 +79,36 @@
 	    e.preventDefault();
 	
 	    if (this.followState === "unfollowed") {
-	      console.log("POST");
-	      this.toggleState();
-	      this.render();
-	      // $.ajax({
-	      //   type: "POST",
-	      //   url: `/users/${this.userId}/follow`,
-	      //   dataType: 'json',
-	      //
-	      //   success(button, toggleState, render) {
-	      //     toggleState(button);
-	      //     render();
-	      //     console.log(this);
-	      //   },
-	      //
-	      //   error: () => { console.log('error'); }
-	      // });
+	      $.ajax({
+	        type: "POST",
+	        url: `/users/${this.userId}/follow`,
+	        dataType: 'json',
+	
+	        success: (data) => { toggleStateAndRender(data); },
+	        error: () => { console.log('Follow Error'); }
+	      });
 	    } else {
-	      console.log("DELETE");
+	      $.ajax({
+	        type: "DELETE",
+	        url: `/users/${this.userId}/follow`,
+	        dataType: 'json',
+	
+	        success: (data) => { toggleStateAndRender(data); },
+	        error: () => { console.log('Unfollow Error'); }
+	      });
+	    }
+	
+	    const toggleStateAndRender = (data) => {
 	      this.toggleState();
 	      this.render();
-	      // $.ajax({
-	      //   type: "DELETE",
-	      //   url: `/users/${this.userId}/follow`,
-	      //   dataType: 'json',
-	      //
-	      //   success(button, toggleState, render) {
-	      //     toggleState(button);
-	      //     render();
-	      //     console.log(this);
-	      //   },
-	      //
-	      //   error: () => { console.log('error'); }
-	      // });
-	    }
+	    };
 	  }
 	
-	  toggleState(){
-	    console.log(this.followState === "followed");
-	    if (this.followState === "unfollowed"){
-	      this.$el.data('initial-follow-state', "followed");
+	  toggleState() {
+	    if (this.followState === "unfollowed") {
+	      this.followState = "followed";
 	    } else {
-	      this.$el.data('initial-follow-state', "unfollowed");
+	      this.followState = "unfollowed";
 	    }
 	  }
 	}
