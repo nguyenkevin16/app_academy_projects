@@ -15,6 +15,18 @@ const APIUtil = {
       dataType: 'json',
       success: success
     });
+  },
+
+  searchUsers(queryVal, success) {
+    $.ajax({
+      url: `/users/search`,
+      dataType: 'json',
+      data: {
+        query: queryVal
+      },
+
+      success: success
+    });
   }
 };
 
