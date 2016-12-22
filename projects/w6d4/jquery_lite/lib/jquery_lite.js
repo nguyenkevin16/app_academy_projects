@@ -124,7 +124,25 @@
 	      Array.from(el.children).forEach((child) => allChildren.push(child));
 	    });
 
-	    return allChildren;
+	    return new DOMNodeCollection(allChildren);
+	  }
+
+	  parent() {
+	    return new DOMNodeCollection(this.elements[0].parentNode);
+	  }
+
+	  find(selector) {
+	    const els = Array.from(document.querySelectorAll(selector));
+	    return new DOMNodeCollection(els);
+	  }
+
+	  remove(selector) {
+	    this.elements.forEach((el) => {
+	      el.innerHTML = "";
+	      el.outerHTML = "";
+	    });
+
+	    this.elements = [];
 	  }
 	}
 
