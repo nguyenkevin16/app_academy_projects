@@ -46,15 +46,24 @@
 
 	const DOMNodeCollection = __webpack_require__(1);
 
-	window.$l = function(selector) {
-	  let nodeListArr = [];
+	window.$l = function(arg) {
+	  const nodeListArr = [];
+	  const funcQueue = [];
 
-	  if (typeof selector === 'string') {
-	    const nodeList = document.querySelectorAll(selector);
+	  if (typeof arg === 'string') {
+	    const nodeList = document.querySelectorAll(arg);
 	    nodeListArr = Array.prototype.slice.call(nodeList);
-	  } else if (selector instanceof HTMLElement) {
-	    nodeListArr.push(selector);
+	  } else if (arg instanceof HTMLElement) {
+	    nodeListArr.push(arg);
+	  } else if (typeof arg === 'function') {
+	    funcQueue.push(arg);
 	  }
+
+	  document.addEventListener("DOMContentLoaded", () => {
+	    funcQueue.forEach((func) => {
+	      func();
+	    });
+	  });
 
 	  return new DOMNodeCollection(nodeListArr);
 	};
