@@ -35,14 +35,38 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // --- your code here!
-
-
-
   // adding new photos
 
-  // --- your code here!
+  const showPhotoButton = document.querySelector('.photo-show-button');
 
+  showPhotoButton.addEventListener("click", (e) => {
+    e.preventDefault();
 
+    const togglePhotoForm = document.querySelector('.photo-form-container');
 
+    if (togglePhotoForm.className.includes("hidden")) {
+      togglePhotoForm.className = "photo-form-container";
+    } else {
+      togglePhotoForm.className = "photo-form-container hidden";
+    }
+  });
+
+  const dogPhotoButton = document.querySelector(".photo-url-submit");
+
+  dogPhotoButton.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const dogPhotoInputEl = document.querySelector(".photo-url-input");
+    const dogPhotoUrl = dogPhotoInputEl.value;
+    dogPhotoInputEl.value = "";
+
+    const img = document.createElement('IMG');
+    img.src = dogPhotoUrl;
+
+    const li = document.createElement('li');
+    li.appendChild(img);
+
+    const ul = document.querySelector('.dog-photos');
+    ul.appendChild(li);
+  });
 });
