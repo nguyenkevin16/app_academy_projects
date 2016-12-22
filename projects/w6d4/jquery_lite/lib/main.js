@@ -12,5 +12,3 @@ window.$l = function(selector) {
 
   return new DOMNodeCollection(nodeListArr);
 };
-
-console.log(window.$l(document.querySelector('.header')));
