@@ -50,6 +50,16 @@ class DOMNodeCollection {
   removeClass() {
     this.attr('class', null);
   }
+
+  children() {
+    let allChildren = [];
+
+    this.elements.forEach((el) => {
+      Array.from(el.children).forEach((child) => allChildren.push(child));
+    });
+
+    return allChildren;
+  }
 }
 
 module.exports = DOMNodeCollection;
