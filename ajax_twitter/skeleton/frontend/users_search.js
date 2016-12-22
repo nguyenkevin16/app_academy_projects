@@ -5,11 +5,7 @@ class UsersSearch {
   constructor(el) {
     this.$el = $(el);
     this.input = this.$el.find('input');
-    this.ul = this.$el.find('ul');
-
-    console.log(this.$el);
-    console.log(this.input);
-    console.log(this.ul);
+    this.ul = this.$el.find('ul.users');
 
     this.input.on('input', this.handleInput.bind(this));
   }
@@ -23,10 +19,21 @@ class UsersSearch {
 
     users.forEach((user) => {
       let userLink = `<a href="/users/${user.id}">${user.username}</a>`;
-      let button = `<button class=follow-toggle> </button>`;
+      let button = `<button class=follow-toggle></button>`;
+
+      function followed() { return user.followed ? "followed" : "unfollowed"; }
+
+      let options = {
+        userId: user.id,
+        followState: followed()
+      };
+
       this.ul.append(`<li>${userLink} ${button}</li>`);
 
-      new FollowToggle(this.$el.find('button.follow-toggle'));
+      const $lastLi = this.ul.find('li:last-of-type');
+      const $lastButton = $lastLi.find('button');
+
+      new FollowToggle($lastButton, options);
     });
   }
 }
