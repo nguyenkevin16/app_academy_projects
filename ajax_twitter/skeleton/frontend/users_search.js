@@ -22,7 +22,6 @@ class UsersSearch {
       let button = `<button class=follow-toggle></button>`;
 
       function followed() { return user.followed ? "followed" : "unfollowed"; }
-
       let options = {
         userId: user.id,
         followState: followed()
@@ -32,7 +31,6 @@ class UsersSearch {
 
       const $lastLi = this.ul.find('li:last-of-type');
       const $lastButton = $lastLi.find('button');
-
       new FollowToggle($lastButton, options);
     });
   }

@@ -46,6 +46,7 @@
 
 	const FollowToggle = __webpack_require__(1);
 	const UserSearch = __webpack_require__(3);
+	const TweetCompose = __webpack_require__(4);
 	
 	$(() => {
 	  $("button.follow-toggle").each((idx, el) => {
@@ -55,6 +56,8 @@
 	  $("nav.users-search").each((idx, el) => {
 	    new UserSearch(el);
 	  });
+	
+	  new TweetCompose();
 	});
 
 
@@ -147,6 +150,16 @@
 	
 	      success: success
 	    });
+	  },
+	
+	  createTweet(data, success) {
+	    $.ajax({
+	      method: 'POST',
+	      url: '/tweets',
+	      dataType: 'json',
+	      data: data,
+	      success: success
+	    });
 	  }
 	};
 	
@@ -181,7 +194,6 @@
 	      let button = `<button class=follow-toggle></button>`;
 	
 	      function followed() { return user.followed ? "followed" : "unfollowed"; }
-	
 	      let options = {
 	        userId: user.id,
 	        followState: followed()
@@ -191,13 +203,47 @@
 	
 	      const $lastLi = this.ul.find('li:last-of-type');
 	      const $lastButton = $lastLi.find('button');
-	
 	      new FollowToggle($lastButton, options);
 	    });
 	  }
 	}
 	
 	module.exports = UsersSearch;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const APIUtil = __webpack_require__(2);
+	
+	class TweetCompose {
+	  constructor() {
+	    this.form = $('.tweet-compose');
+	    this.inputs = $('.tweet-compose:input');
+	    this.ul = $(`${this.form.data('tweets-ul')}`);
+	
+	    this.form.on("submit", this.submit.bind(this));
+	  }
+	
+	  submit(e) {
+	    e.preventDefault();
+	    let formData = $(e.currentTarget).serializeJSON();
+	
+	    APIUtil.createTweet(formData, this.handleSuccess.bind(this));
+	    this.inputs.each((input) => input.prop('disabled', true));
+	  }
+	
+	  handleSuccess(tweet) {
+	    this.inputs.val("");
+	    this.inputs.each((input) => input.prop('disabled', false));
+	
+	    let $tweet = $(`<li>${tweet.content}</li>`);
+	    this.ul.append($tweet);
+	  }
+	}
+	
+	module.exports = TweetCompose;
 
 
 /***/ }
