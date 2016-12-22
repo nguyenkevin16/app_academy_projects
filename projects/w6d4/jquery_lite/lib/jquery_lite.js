@@ -42,18 +42,37 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	const DOMNodeCollection = __webpack_require__(1);
 
 	window.$l = function(selector) {
-	  let nodeListArr = null;
+	  let nodeListArr = [];
 
 	  if (typeof selector === 'string') {
 	    const nodeList = document.querySelectorAll(selector);
 	    nodeListArr = Array.prototype.slice.call(nodeList);
+	  } else if (selector instanceof HTMLElement) {
+	    nodeListArr.push(selector);
 	  }
 
-	  return nodeListArr;
+	  return new DOMNodeCollection(nodeListArr);
 	};
+
+	console.log(window.$l(document.querySelector('.header')));
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	class DOMNodeCollection {
+	  constructor(HTMLElements) {
+	    this.elements = HTMLElements;
+	  }
+	}
+
+	module.exports = DOMNodeCollection;
 
 
 /***/ }
