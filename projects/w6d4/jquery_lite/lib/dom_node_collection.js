@@ -43,12 +43,12 @@ class DOMNodeCollection {
     }
   }
 
-  addClass() {
-
+  addClass(className) {
+    this.elements.forEach((el) => { el.className = className; });
   }
 
   removeClass() {
-
+    this.attr('class', null);
   }
 }
 
