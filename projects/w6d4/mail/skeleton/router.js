@@ -5,7 +5,7 @@ function Router(node, routes) {
 
 Router.prototype.start = function() {
   this.render();
-  document.addEventListener("hashchange", this.render.bind(this));
+  document.addEventListener("click", this.render.bind(this));
 };
 
 Router.prototype.activeRoute = function() {

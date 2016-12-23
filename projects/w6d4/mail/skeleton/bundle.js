@@ -53,12 +53,13 @@
 	  sidebarLi.forEach((li) => {
 	    li.addEventListener("click", (e2) => {
 	      window.location.hash = li.innerText.toLowerCase();
-
-	      const content = document.querySelector('.content');
-	      const router = new Router(content, routes);
-	      router.start();
 	    });
 	  });
+
+	  const content = document.querySelector('.content');
+	  const router = new Router(content, routes);
+	  router.start();
+	  location.hash = "inbox";
 	});
 
 	const routes = {
@@ -77,7 +78,7 @@
 
 	Router.prototype.start = function() {
 	  this.render();
-	  document.addEventListener("hashchange", this.render.bind(this));
+	  document.addEventListener("click", this.render.bind(this));
 	};
 
 	Router.prototype.activeRoute = function() {
@@ -100,18 +101,64 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	const MessageStore = __webpack_require__(3);
 
 	const Inbox = {
 	  render: function() {
 	    let ul = document.createElement('ul');
 	    ul.className = "messages";
-	    ul.innerHTML = "An Inbox Message";
+
+	    MessageStore.getInboxMessages().forEach((message) => {
+	      ul.appendChild(this.renderMessage(message));
+	    });
+
 	    return ul;
+	  },
+
+	  renderMessage: function(message) {
+	    let li = document.createElement('li');
+	    li.className = 'message';
+	    li.innerHTML = `<span class="from">${message.from}</span>
+	      <span class="subject">${message.subject}</span>
+	      <span class="body">${message.body}</span>`;
+	    return li;
 	  }
 	};
 
 	module.exports = Inbox;
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	let messages = {
+	  sent: [
+	    {to: "friend@mail.com", subject: "Check this out", body: "It's so cool"},
+	    {to: "person@mail.com", subject: "zzz", body: "so booring"}
+	  ],
+
+	  inbox: [
+	    { from: "grandma@mail.com", subject: "Fwd: Fwd: Fwd: Check this out",
+	      body: "Stay at home mom discovers cure for leg cramps. Doctors hate her" },
+	    { from: "person@mail.com", subject: "Questionnaire",
+	      body: "Take this free quiz win $1000 dollars" }
+	  ]
+	};
+
+	const MessageStore = {
+	  getInboxMessages: function() {
+	    return messages.inbox;
+	  },
+
+	  getSentMessages: function() {
+	    return messages.sent;
+	  }
+	};
+
+	module.exports = MessageStore;
 
 
 /***/ }
