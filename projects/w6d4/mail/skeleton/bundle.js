@@ -47,6 +47,7 @@
 	const Router = __webpack_require__(1);
 	const Inbox = __webpack_require__(2);
 	const Sent = __webpack_require__(4);
+	const Compose = __webpack_require__(5);
 
 	document.addEventListener("DOMContentLoaded", (e) => {
 	  const sidebarLi = Array.from(document.querySelectorAll('.sidebar-nav li'));
@@ -65,7 +66,8 @@
 
 	const routes = {
 	  inbox: Inbox,
-	  sent: Sent
+	  sent: Sent,
+	  compose: Compose
 	};
 
 
@@ -157,8 +159,30 @@
 
 	  getSentMessages: function() {
 	    return messages.sent;
+	  },
+
+	  getMessageDraft: function() {
+	    return messageDraft;
+	  },
+
+	  updateDraftField: function(field, value) {
+	    messageDraft.field = value;
+	  },
+
+	  sendDraft: function() {
+	    messages.sent.push(messageDraft);
+	    messageDraft = new Message();
 	  }
 	};
+
+	function Message(from, to, subject, body) {
+	  this.from = from;
+	  this.to = to;
+	  this.subject = subject;
+	  this.body = body;
+	}
+
+	const messageDraft = new Message();
 
 	module.exports = MessageStore;
 
@@ -192,6 +216,47 @@
 	};
 
 	module.exports = Sent;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const MessageStore = __webpack_require__(3);
+
+	const Compose = {
+	  render: function() {
+	    let div = document.createElement('div');
+	    div.className = 'new-message';
+	    div.innerHTML = this.renderForm();
+
+	    div.addEventListener('change', e => {
+	      const field = e.target.name;
+	      const value = e.target.value;
+	      MessageStore.updateDraftField(field, value);
+	    });
+
+	    return div;
+	  },
+
+	  renderForm: function() {
+	    const messageDraft = MessageStore.getMessageDraft();
+
+	    const htmlString =
+	    `<p class="new-message-header">New Message</p>
+	    <form class="compose-form">
+	    <input placeholder="Recipient" name="to" type="text" value="${messageDraft.to}">
+	    <input placeholder="Subject" name="subject" type="text" value="${messageDraft.subject}">
+	    <textarea name="body" rows=20>${messageDraft.body}</textarea>
+	    <button type="submit" class="btn btn-primary submit-message">Send</button>
+	    </form>`;
+
+	    return htmlString;
+	  }
+	};
+
+
+	module.exports = Compose;
 
 
 /***/ }
