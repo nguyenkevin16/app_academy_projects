@@ -42,7 +42,9 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	const Router = __webpack_require__(1);
 
 	document.addEventListener("DOMContentLoaded", (e) => {
 	  const sidebarLi = Array.from(document.querySelectorAll('.sidebar-nav li'));
@@ -50,9 +52,40 @@
 	  sidebarLi.forEach((li) => {
 	    li.addEventListener("click", (e2) => {
 	      window.location.hash = li.innerText.toLowerCase();
+
+	      const content = document.querySelector('.content');
+	      const router = new Router(content);
+	      router.start();
 	    });
 	  });
 	});
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	function Router(node) {
+	  this.node = node;
+	}
+
+	Router.prototype.start = function() {
+	  this.render();
+	  document.addEventListener("hashchange", this.render.bind(this));
+	};
+
+	Router.prototype.activeRoute = function() {
+	  return (window.location.hash.replace('#', ''));
+	};
+
+	Router.prototype.render = function() {
+	  this.node.innerHTML = "";
+	  let newEl = document.createElement('p');
+	  newEl.innerHTML = this.activeRoute();
+	  this.node.appendChild(newEl);
+	};
+
+	module.exports = Router;
 
 
 /***/ }
