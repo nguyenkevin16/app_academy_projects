@@ -1,0 +1,21 @@
+<h1><%= @post.title %></h1>
+
+<section>
+  <p><%= @post.content %></p>
+  <!-- Add link to edit post if owner of post is user -->
+</section>
+
+<section>
+  <%= button_to "Edit post", edit_post_url, method: :get %>
+  <%= button_to "Delete post", post_url(@post), method: :delete %>
+
+  <!-- back to subs index -->
+</section>
+
+<footer>
+  <ul>
+  <% @post.subs.each do |sub| %>
+    <li><%= link_to "#{sub.title}", sub_url(sub), method: :get %></li>
+  <% end %>
+  </ul>
+</footer>

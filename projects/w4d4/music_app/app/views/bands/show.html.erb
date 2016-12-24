@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= @band.name %></title>
+  </head>
+
+  <body>
+    <%= link_to "Back to all bands", bands_url %>
+
+    <h2> BAND NAME: <%= @band.name %> </h2>
+    <%= button_to "Edit band", edit_band_url(@band), method: :get, form: {style: 'display:inline-block;'} %>
+    <%= button_to "Delete band", band_url(@band), method: :delete, form: {style: 'display:inline-block;'} %>
+
+    </ul>
+
+    <h3> Albums </h3>
+    <%= button_to "Create album", new_album_url, method: :get, form: {style: 'display:inline-block;'} %>
+
+    <ul>
+      <% @band.albums.each do |album| %>
+        <li><%= link_to "#{album.name}", album_url(album), method: :get %></li>
+      <% end %>
+    </ul>
+
+
+  </body>
+</html>

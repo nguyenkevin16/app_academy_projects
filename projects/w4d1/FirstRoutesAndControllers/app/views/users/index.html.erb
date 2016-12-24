@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>User</title>
+  </head>
+
+  <body>
+    <h3>Usernames:</h3>
+
+    <ul>
+    <% @users.each do |user| %>
+      <li><%= user.username %></li>
+      <br>
+    <% end %>
+    </ul>
+
+
+    <%= render "shared/footer" %>
+  </body>
+</html>
