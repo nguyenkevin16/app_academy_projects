@@ -18,7 +18,14 @@ const initialState = {
 const todosReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch(action.type){
-    // case RECEIVE_TODOS:
+    case RECEIVE_TODOS:
+      const newState = {};
+
+      action.todos.forEach(todo => {
+        newState[todo.id] = todo;
+      });
+
+      return newState;
     // case RECEIVE_TODO:
     default:
       return state;
