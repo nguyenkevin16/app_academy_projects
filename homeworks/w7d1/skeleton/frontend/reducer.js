@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SWITCH_CURRENCY:
       return {
         baseCurrency: action.baseCurrency,
@@ -16,7 +16,5 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
-// window.reducer = reducer;
 
 export default reducer;
