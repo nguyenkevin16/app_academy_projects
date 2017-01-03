@@ -68,9 +68,22 @@
 	  var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
 	  var store = (0, _store2.default)(preloadedState);
 	
+	  store.dispatch = addLoggingToDispatch(store);
+	
 	  var root = document.getElementById('content');
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
+	
+	var addLoggingToDispatch = function addLoggingToDispatch(store) {
+	  var dispatch = store.dispatch;
+	
+	  return function (action) {
+	    console.log(store.getState());
+	    console.log(action);
+	    dispatch(action);
+	    console.log(store.getState());
+	  };
+	};
 
 /***/ },
 /* 1 */
