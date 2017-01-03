@@ -52,9 +52,15 @@ class TodoForm extends React.Component {
             required></textarea>
         </label>
         <button className="create-button">Create Todo!</button>
+
+        <ul className="todo-form-errors">
+          {this.props.errors.map((error, i) => (
+            <li key={i}>{error}</li>
+          ))}
+        </ul>
       </form>
     );
   }
-};
+}
 
 export default TodoForm;
