@@ -28,3 +28,19 @@ document.addEventListener('DOMContentLoaded', () => {
 //     done: true
 //   },
 // ];
+
+// TODO:
+// const newSteps = [
+//   { // this is the step with id = 1
+//    id: 3,
+//    title: "walk??!?!?! to store",
+//    done: false,
+//    todo_id: 1
+//   },
+//   { // this is the step with id = 2
+//    id: 4,
+//    title: "buy!?!?!?! soap",
+//    done: false,
+//    todo_id: 2
+//   }
+// ];
