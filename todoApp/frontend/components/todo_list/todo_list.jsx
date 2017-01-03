@@ -10,12 +10,13 @@ class TodoList extends React.Component {
   }
 
   render() {
-    const { todos, createTodo, errors } = this.props;
+    const { todos, createTodo, errors, updateTodo } = this.props;
     const todoItems = todos.map(todo => (
         <TodoListItem
           key={`todo-list-item${todo.id}`}
           todo={todo}
-          createTodo={ createTodo } />
+          createTodo={ createTodo }
+          updateTodo={ updateTodo } />
       )
     );
 
