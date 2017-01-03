@@ -7,6 +7,7 @@ class TodoList extends React.Component {
 
   componentDidMount() {
     this.props.fetchTodos();
+    this.props.fetchSteps();
   }
 
   render() {
