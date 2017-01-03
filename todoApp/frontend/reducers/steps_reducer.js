@@ -1,7 +1,8 @@
 import merge from 'lodash/merge';
 import { RECEIVE_STEPS,
          RECEIVE_STEP,
-         REMOVE_STEP } from '../actions/step_actions';
+         REMOVE_STEP,
+         UPDATE_STEP } from '../actions/step_actions';
 
 const initialState = {
   1: { // this is the step with id = 1
@@ -40,6 +41,10 @@ const stepsReducer = (state = initialState, action) => {
       });
     case REMOVE_STEP:
       delete nextState[action.id];
+      return nextState;
+    case UPDATE_STEP:
+      let step = nextState[action.step.id];
+      step.done = !step.done;
       return nextState;
     default:
       return state;
