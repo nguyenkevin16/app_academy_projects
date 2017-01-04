@@ -5,7 +5,7 @@ export const fetchTodos = () => (
   })
 );
 
-export const createTodo = ({ title, body, done }) => (
+export const createTodo = ({ title, body, done, tag_names }) => (
   $.ajax({
     method: 'POST',
     url: 'api/todos',
@@ -13,7 +13,8 @@ export const createTodo = ({ title, body, done }) => (
       todo: {
         title,
         body,
-        done
+        done,
+        tag_names
       }
     }
   })

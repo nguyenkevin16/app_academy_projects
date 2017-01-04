@@ -8,7 +8,8 @@ class TodoForm extends React.Component {
       title: "",
       body: "",
       done: false,
-      tag_names: []
+      tag_names: [],
+      tagInput: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,18 +27,20 @@ class TodoForm extends React.Component {
     this.props.createTodo(todo).then(() => {
       this.setState({
         title: "",
-        body: ""
+        body: "",
+        tag_names: []
       });
     });
   }
 
   updateTag(e) {
-    this.setState({tag_names: [...this.state.tag_names, e.target.value]});
+    this.setState({tagInput: e.target.value});
   }
 
-  handleTag(e) {
-    e.preventDefault();
-    this.updateTag(e);
+  handleTag() {
+    event.preventDefault();
+    this.setState({tag_names: [...this.state.tag_names, this.state.tagInput]});
+    this.setState({tagInput: ""});
   }
 
   render() {
@@ -68,12 +71,13 @@ class TodoForm extends React.Component {
           <ul>
             {
               this.state.tag_names.map((tag, i) => (
-                <li key={i}>{ tag.name }</li>
+                <li key={i}>{ tag }</li>
               ))
             }
           </ul>
 
           <input type="text"
+            value={this.state.tagInput}
             onChange={this.updateTag} />
           <button type="button"
             onClick={this.handleTag}>
