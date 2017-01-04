@@ -7,10 +7,13 @@ class TodoForm extends React.Component {
     this.state = {
       title: "",
       body: "",
-      done: false
+      done: false,
+      tag_names: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTag = this.handleTag.bind(this);
+    this.updateTag = this.updateTag.bind(this);
   }
 
   update(property) {
@@ -26,6 +29,15 @@ class TodoForm extends React.Component {
         body: ""
       });
     });
+  }
+
+  updateTag(e) {
+    this.setState({tag_names: [...this.state.tag_names, e.target.value]});
+  }
+
+  handleTag(e) {
+    e.preventDefault();
+    this.updateTag(e);
   }
 
   render() {
@@ -51,6 +63,24 @@ class TodoForm extends React.Component {
             onChange={this.update('body')}
             required></textarea>
         </label>
+
+        <label>Tags:
+          <ul>
+            {
+              this.state.tag_names.map((tag, i) => (
+                <li key={i}>{ tag.name }</li>
+              ))
+            }
+          </ul>
+
+          <input type="text"
+            onChange={this.updateTag} />
+          <button type="button"
+            onClick={this.handleTag}>
+            Create Tag!
+          </button>
+        </label>
+
         <button className="create-button">Create Todo!</button>
 
         <ul className="todo-form-errors">

@@ -10,3 +10,6 @@ Todo.create(title: "todo1", body: "body1", done: false)
 Todo.create(title: "todo2", body: "body2", done: false)
 Todo.create(title: "todo3", body: "body3", done: true)
 Todo.create(title: "todo4", body: "body4", done: true)
+
+Tag.create(name: "Grocery")
+Tagging.create!(todo_id: 2, tag_id: 1)
