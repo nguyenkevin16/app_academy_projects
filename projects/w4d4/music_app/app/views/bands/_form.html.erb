@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= action == :edit ? "Edit band!" : "Create band!" %></title>
+  </head>
+
+  <body>
+    <% action_url = (action == :edit) ? band_url(band) : bands_url %>
+
+    <form action="<%= action_url %>" method="post">
+      <%= auth_token %>
+
+      <% if action == :edit %>
+        <input type="hidden" name="_method" value="patch">
+      <% end %>
+
+      <h2><%= action == :edit ? "Edit a band!" : "Create a band!" %></h2>
+
+      <label for="name">Enter a band name!</label><br>
+      <input type="text" name="band[name]" id="name">
+
+      <input type="submit" value="<%= action == :edit ? "Edit a band!" : "Create a band!" %>">
+    </form>
+  </body>
+</html>

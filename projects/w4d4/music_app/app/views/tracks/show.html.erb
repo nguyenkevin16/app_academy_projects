@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= @track.name %></title>
+  </head>
+
+  <body>
+    <%= link_to "Album page", album_url(@track.album), method: :get %>
+
+    <h3> Track name: <%= @track.name %> <%= @track.track_type == "bonus" ? " : BONUS" : "" %> </h3>
+    <%= button_to "Edit track", edit_track_url(@track), method: :get, form: {style: 'display:inline-block;'} %>
+    <%= button_to "Delete track", track_url(@track), method: :delete, form: {style: 'display:inline-block;'} %>
+
+    <br><br>
+
+    <h3> Lyrics </h3>
+    <%= ugly_lyrics(@track.lyrics) %>
+
+    <br><br>
+
+    <h3> Notes </h3>
+
+    <ul>
+    <% @track.notes.each do |note| %>
+      <li><%= render "notes/note", note: note %></li>
+    <% end %>
+    </ul>
+
+    <%= render "notes/form", track: @track %>
+  </body>
+</html>
