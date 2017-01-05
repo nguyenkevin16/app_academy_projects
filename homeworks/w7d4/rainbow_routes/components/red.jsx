@@ -24,15 +24,18 @@ class Red extends React.Component {
 
   resetRed() {
     // your code here
+    this.props.router.push('/red');
   }
 
   addOrange() {
     // your code here
+    this.props.router.push('/red/orange');
   }
 
   addYellow() {
     // your code here
+    this.props.router.push('/red/yellow');
   }
-};
+}
 
 export default withRouter(Red);
