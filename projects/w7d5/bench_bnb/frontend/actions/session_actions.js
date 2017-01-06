@@ -17,18 +17,18 @@ export const receiveErrors = errors => ({
 // Async
 export const signup = user => dispatch => (
   APIUtils.signup(user).then(
-    currentUser => { dispatch(currentUser); }
+    currentUser => { dispatch(receiveCurrentUser(currentUser)); }
   )
 );
 
 export const login = user => dispatch => (
   APIUtils.login(user).then(
-    currentUser => { dispatch(currentUser); }
+    currentUser => { dispatch(receiveCurrentUser(currentUser)); }
   )
 );
 
 export const logout = () => dispatch => (
   APIUtils.logout().then(
-    () => { dispatch(null); }
+    () => { dispatch(receiveCurrentUser(null)); }
   )
 );
