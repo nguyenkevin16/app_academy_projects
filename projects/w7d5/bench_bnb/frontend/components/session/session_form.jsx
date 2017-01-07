@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -12,20 +12,21 @@ class SessionForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.redirect = this.redirect.bind(this);
    }
 
   handleSubmit(e) {
-    e.peventDefault();
+    e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user).then(() => this.redirect());
   }
 
   handleChange(property) {
-    return e => {
-      e.preventDefault();
-      console.log(`${property} : ${e.target.value}`);
-      return this.setState({ [property]: e.target.value });
-    };
+    return e => (this.setState({ [property]: e.target.value }));
+  }
+
+  redirect() {
+    this.props.router.push('/');
   }
 
   render() {
@@ -64,4 +65,4 @@ class SessionForm extends React.Component {
   }
 }
 
-export default SessionForm;
+export default withRouter(SessionForm);
