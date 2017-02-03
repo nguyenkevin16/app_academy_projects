@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
       log_in(@user)
       render :show
     else
-      render json: 'Invalid credentials', status: 401
+      render json: ['Invalid credentials'], status: 401
     end
   end
 
@@ -15,7 +15,7 @@ class Api::SessionsController < ApplicationController
       log_out
       render json: {}, status: 200
     else
-      render json: {}, status: 404
+      render json: ['Not logged in.'], status: 404
     end
   end
 

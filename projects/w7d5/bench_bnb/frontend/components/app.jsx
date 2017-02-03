@@ -7,7 +7,6 @@ const App = ({ children }) => (
       Bench BnB
     </h1>
 
-    <GreetingContainer />
     { children }
   </div>
 );
