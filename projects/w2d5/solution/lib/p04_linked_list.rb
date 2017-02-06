@@ -68,12 +68,12 @@ class LinkedList
 
     new_link
   end
-  
+
   def update(key, val)
     each do |link|
       if link.key == key
         link.val = val
-        return link;
+        return link
       end
     end
   end

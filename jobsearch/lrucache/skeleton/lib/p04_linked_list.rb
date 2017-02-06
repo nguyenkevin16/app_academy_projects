@@ -13,10 +13,11 @@ class Link
   end
 
   def remove
-    self.prev.next = self.next
-    self.next.prev = self.prev
+    self.prev.next = self.next if self.prev
+    self.next.prev = self.prev if self.next
     self.next = nil
     self.prev = nil
+    self
   end
 end
 
@@ -37,11 +38,13 @@ class LinkedList
   end
 
   def first
-    @head.next unless empty?
+    return @head.next unless empty?
+    nil
   end
 
   def last
-    @tail.prev unless empty?
+    return @tail.prev unless empty?
+    nil
   end
 
   def empty?
@@ -59,12 +62,20 @@ class LinkedList
 
   def insert(key, val)
     insert_link = Link.new(key, val)
-    prev_link = @tail.prev
 
-    prev_link.next = insert_link
+    @tail.prev.next = insert_link
+    insert_link.prev = @tail.prev
     insert_link.next = @tail
-    insert_link.prev = prev_link
     @tail.prev = insert_link
+
+    insert_link
+  end
+
+  def update(key, val)
+    each do |node|
+      node.val = val if node.key == key
+      return node
+    end
   end
 
   def remove(key)
@@ -81,7 +92,7 @@ class LinkedList
     node_to_check = @head.next
 
     until node_to_check == @tail
-       yield(node_to_check)
+      yield node_to_check
       node_to_check = node_to_check.next
     end
   end
