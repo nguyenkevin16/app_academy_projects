@@ -67,11 +67,13 @@ class BinarySearchTree
 
   def self.find!(node, value)
     return nil unless node
-    return nil if node.right.nil? && node.left.nil?
     return node if value == node.value
 
-    BinarySearchTree.find!(node.left, value)
-    BinarySearchTree.find!(node.right, value)
+    if value <= node.value
+      BinarySearchTree.find!(node.left, value)
+    else
+      BinarySearchTree.find!(node.right, value)
+    end
   end
 
   def self.preorder!(node)
