@@ -90,17 +90,17 @@ class BinarySearchTree
 
   def self.height!(node)
     return -1 unless node
-    return 0 if node.right.nil? && node.left.nil?
-    return 1 if node.right || node.left
 
-    left_depth, right_depth = 0
-    left_depth + BinarySearchTree.height!(node.left)
-    right_depth + BinarySearchTree.height!(node.right)
+    left = BinarySearchTree.height!(node.left)
+    right = BinarySearchTree.height!(node.right)
 
-    p right_depth
-    p left_depth
+    if left >= right
+      height = left
+    else
+      height = right
+    end
 
-    right_depth > left_depth ? right_depth : left_depth
+    1 + height
   end
 
   def self.max(node)
