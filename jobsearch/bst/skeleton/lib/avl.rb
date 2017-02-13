@@ -1,18 +1,19 @@
 class AVLTreeNode
-  attr_accessor :link, :balance, :value
+  attr_accessor :link, :balance, :value, :subtrees
 
   def initialize(value)
-
+    @value = value
+    @subtrees = [nil, nil]
   end
 end
 
 class AVLTree
   def initialize
-
+    @root = nil
   end
 
   def insert(value)
-
+    @root = AVLTree.insert!(@root, value)
   end
 
   def insert_unbounded(value)
@@ -36,7 +37,13 @@ class AVLTree
   end
 
   def self.single_rotation!(root, dir)
+    other_dir = dir == 0 ? 1 : 0
+    new_root = root.subtrees[other_dir]
 
+    root.subtrees[other_dir] = new_root.subtrees[dir]
+    new_root.subtrees[dir] = root
+
+    new_root
   end
 
   def self.double_rotation!(root, dir)
