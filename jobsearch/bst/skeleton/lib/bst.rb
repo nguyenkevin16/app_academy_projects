@@ -26,15 +26,15 @@ class BinarySearchTree
   end
 
   def inorder
-
+    BinarySearchTree.inorder!(@root)
   end
 
   def postorder
-
+    BinarySearchTree.postorder!(@root)
   end
 
   def preorder
-
+    BinarySearchTree.preorder!(@root)
   end
 
   def height
@@ -50,7 +50,7 @@ class BinarySearchTree
   end
 
   def delete(value)
-
+    @root = BinarySearchTree.delete!(@root, value)
   end
 
   def self.insert!(node, value)
@@ -76,16 +76,37 @@ class BinarySearchTree
     end
   end
 
+  # Root, left, right
   def self.preorder!(node)
+    return [] unless node
 
+    nodes = []
+    nodes << node.value
+    nodes += BinarySearchTree.preorder!(node.left) if node.left
+    nodes += BinarySearchTree.preorder!(node.right) if node.right
+    nodes
   end
 
+  # Left, root, right
   def self.inorder!(node)
+    return [] unless node
 
+    nodes = []
+    nodes += BinarySearchTree.inorder!(node.left) if node.left
+    nodes << node.value
+    nodes += BinarySearchTree.inorder!(node.right) if node.right
+    nodes
   end
 
+  # Left, right, root
   def self.postorder!(node)
+    return [] unless node
 
+    nodes = []
+    nodes += BinarySearchTree.postorder!(node.left) if node.left
+    nodes += BinarySearchTree.postorder!(node.right) if node.right
+    nodes << node.value
+    nodes
   end
 
   def self.height!(node)
@@ -115,24 +136,34 @@ class BinarySearchTree
 
   def self.delete_min!(node)
     return nil unless node
-    remove_node = node
-    parent_node = node
+    remove_node, parent_node = node, node
 
-    if node.left
-      remove_node = node.left
-    end
+    remove_node = node.left if node.left
 
     until remove_node.left.nil?
       remove_node = remove_node.left
       parent_node = parent_node.left
     end
 
-    if remove_node.right
-      parent_node.left = remove_node.right
-    end
+    parent_node.left = remove_node.right if remove_node.right
   end
 
   def self.delete!(node, value)
+    return nil unless node
 
+    if value < node.value
+      node.left = BinarySearchTree.delete!(node.left, value)
+    elsif value > node.value
+      node.right = BinarySearchTree.delete!(node.right, value)
+    else
+      return node.left unless node.right
+      return node.right unless node.left
+      temp = node
+      node = temp.right.min
+      node.right = BinarySearchTree.delete_min!(temp.right)
+      node.left = temp.left
+    end
+
+    node
   end
 end
