@@ -1,0 +1,96 @@
+body, header, nav, ul, li, aside, h1, a, figure,
+figcaption, p, ol, section, form, label, footer {
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  font: inherit;
+}
+
+body {
+  line-height: 2;
+  font-family: "Helvetica";
+  font-weight: 100;
+
+  width: 90%;
+  margin: 80px auto;
+
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
+
+header {
+  text-align: center;
+  flex: 1 100%;
+}
+
+.main {
+  flex: 1;
+  order: 2;
+}
+
+.sidebar {
+  flex: 2;
+  order: 3;
+}
+
+.reviews {
+  flex: 1 100%;
+  order: 4;
+}
+
+footer {
+  flex: 1 100%;
+  order: 5;
+}
+
+header, footer, .sidebar, .reviews, .main {
+  border: 2px solid black;
+  padding: 30px;
+  margin: 30px 30px;
+}
+
+h1 {
+  font-size: 38px;
+  text-shadow: 1.25px 1.25px #d6d6d6;
+}
+
+nav {
+  display: inline-block;
+  padding: 20px 20px;
+
+}
+
+ol, ul {
+  list-style: circle outside;
+}
+
+ol a, ul a, figcaption a {
+  text-decoration: none;
+  color: grey;
+}
+
+header ul {
+  list-style-type: none;
+}
+
+header img {
+  height: 100px;
+}
+
+figure img {
+  width: 550px;
+  height: auto;
+}
+
+input, option, header ul a {
+  cursor: pointer;
+  outline: none;
+}
+
+input:last-child {
+  background-color: grey;
+
+}
